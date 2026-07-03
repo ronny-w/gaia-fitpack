@@ -1,0 +1,140 @@
+1the input data
+0        y         0.0     0.2     0.4     0.6     0.8     1.0
+        x
+       0.0       0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
+       0.2       0.0000  0.3455  0.5590  0.5590  0.3455  0.0000
+       0.4       0.0000  0.5590  0.9045  0.9045  0.5590  0.0000
+       0.6       0.0000  0.5590  0.9045  0.9045  0.5590  0.0000
+       0.8       0.0000  0.3455  0.5590  0.5590  0.3455  0.0000
+       1.0       0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
+0        y
+        x
+       0.0       0.0000  0.3455  0.5590  0.5590  0.3455
+       0.2       0.0000  0.5590  0.9045  0.9045  0.5590
+       0.4       0.0000  0.5590  0.9045  0.9045  0.5590
+       0.6       0.0000  0.3455  0.5590  0.5590  0.3455
+       0.8       0.0000  0.0000  0.0000  0.0000  0.0000
+       1.0      -0.0000  0.0000********  0.0000********
+0smoothing spline of degrees  3  3
+ smoothing factor s=  10.00
+ sum squared residuals =   0.137444E-01     error flag= -2
+ total number of knots in the x-direction =  8
+ position of the knots 
+       0.00  0.00  0.00  0.00  1.00  1.00  1.00  1.00
+ total number of knots in the y-direction =  8
+ position of the knots 
+       0.00  0.00  0.00  0.00  1.00  1.00  1.00  1.00
+0b-spline coefficients 
+        0.0001  -0.0129  -0.0129   0.0001  -0.0129   1.6828   1.6828  -0.0129
+       -0.0129   1.6828   1.6828  -0.0129   0.0001  -0.0129  -0.0129   0.0001
+0spline values at selected grid points
+0        y         0.0     0.4     0.8
+        x
+       0.0       0.0001 -0.0092 -0.0061
+       0.4      -0.0092  0.8672  0.5750
+       0.8      -0.0061  0.5750  0.3813
+0smoothing spline of degrees  3  3
+ smoothing factor s=   0.22
+ sum squared residuals =   0.137444E-01     error flag= -2
+ total number of knots in the x-direction =  8
+ position of the knots 
+       0.00  0.00  0.00  0.00  1.00  1.00  1.00  1.00
+ total number of knots in the y-direction =  8
+ position of the knots 
+       0.00  0.00  0.00  0.00  1.00  1.00  1.00  1.00
+0b-spline coefficients 
+        0.0001  -0.0129  -0.0129   0.0001  -0.0129   1.6828   1.6828  -0.0129
+       -0.0129   1.6828   1.6828  -0.0129   0.0001  -0.0129  -0.0129   0.0001
+0spline values at selected grid points
+0        y         0.0     0.4     0.8
+        x
+       0.0       0.0001 -0.0092 -0.0061
+       0.4      -0.0092  0.8672  0.5750
+       0.8      -0.0061  0.5750  0.3813
+0smoothing spline of degrees  3  3
+ smoothing factor s=   0.10
+ sum squared residuals =   0.137444E-01     error flag= -2
+ total number of knots in the x-direction =  8
+ position of the knots 
+       0.00  0.00  0.00  0.00  1.00  1.00  1.00  1.00
+ total number of knots in the y-direction =  8
+ position of the knots 
+       0.00  0.00  0.00  0.00  1.00  1.00  1.00  1.00
+0b-spline coefficients 
+        0.0001  -0.0129  -0.0129   0.0001  -0.0129   1.6828   1.6828  -0.0129
+       -0.0129   1.6828   1.6828  -0.0129   0.0001  -0.0129  -0.0129   0.0001
+0spline values at selected grid points
+0        y         0.0     0.4     0.8
+        x
+       0.0       0.0001 -0.0092 -0.0061
+       0.4      -0.0092  0.8672  0.5750
+       0.8      -0.0061  0.5750  0.3813
+0smoothing spline of degrees  3  3
+ smoothing factor s=   0.00
+ sum squared residuals =   0.000000E+00     error flag= -1
+ total number of knots in the x-direction = 10
+ position of the knots 
+       0.00  0.00  0.00  0.00  0.40  0.60  1.00  1.00  1.00  1.00
+ total number of knots in the y-direction = 10
+ position of the knots 
+       0.00  0.00  0.00  0.00  0.40  0.60  1.00  1.00  1.00  1.00
+0b-spline coefficients 
+        0.0000  -0.0000   0.0000  -0.0000   0.0000   0.0000  -0.0000   0.1847
+        0.4366   0.4366   0.1847   0.0000   0.0000   0.4366   1.0327   1.0327
+        0.4366   0.0000  -0.0000   0.4366   1.0327   1.0327   0.4366   0.0000
+       -0.0000   0.1847   0.4366   0.4366   0.1847   0.0000   0.0000   0.0000
+        0.0000   0.0000   0.0000   0.0000
+0spline values at selected grid points
+0        y         0.0     0.4     0.8
+        x
+       0.0       0.0000 -0.0000 -0.0000
+       0.4      -0.0000  0.9045  0.5590
+       0.8      -0.0000  0.5590  0.3455
+0smoothing spline of degrees  5  5
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+ smoothing factor s=   0.20
+ sum squared residuals =   0.724669E-13     error flag= -2
+ total number of knots in the x-direction = 12
+ position of the knots 
+       0.00  0.00  0.00  0.00  0.00  0.00  1.00  1.00  1.00  1.00
+       1.00  1.00
+ total number of knots in the y-direction = 12
+ position of the knots 
+       0.00  0.00  0.00  0.00  0.00  0.00  1.00  1.00  1.00  1.00
+       1.00  1.00
+0b-spline coefficients 
+        0.0000   0.0000  -0.0000   0.0000  -0.0000   0.0000  -0.0000   0.3836
+        0.7984   0.7984   0.3836   0.0000   0.0000   0.7984   1.6643   1.6643
+        0.7984   0.0000  -0.0000   0.7984   1.6643   1.6643   0.7984   0.0000
+       -0.0000   0.3836   0.7984   0.7984   0.3836   0.0000   0.0000   0.0000
+        0.0000   0.0000   0.0000   0.0000
+0spline values at selected grid points
+0        y         0.0     0.4     0.8
+        x
+       0.0       0.0000 -0.0000  0.0000
+       0.4      -0.0000  0.9045  0.5590
+       0.8      -0.0000  0.5590  0.3455
+0least-squares spline of degrees  3  3
+ sum squared residuals =   0.724669E-13     error flag= 10
+ total number of knots in the x-direction = 11
+ position of the knots 
+       0.00  0.00  0.00  0.00 -0.50  0.00  0.50  1.00  1.00  1.00
+       1.00
+ total number of knots in the y-direction = 11
+ position of the knots 
+       0.00  0.00  0.00  0.00 -0.50  0.00  0.50  1.00  1.00  1.00
+       1.00
+0b-spline coefficients 
+        0.0000   0.0000  -0.0000   0.0000  -0.0000   0.0000  -0.0000   0.3836
+        0.7984   0.7984   0.3836   0.0000   0.0000   0.7984   1.6643   1.6643
+        0.7984   0.0000  -0.0000   0.7984   1.6643   1.6643   0.7984   0.0000
+       -0.0000   0.3836   0.7984   0.7984   0.3836   0.0000   0.0000   0.0000
+        0.0000   0.0000   0.0000   0.0000   0.0000   0.0000*********   0.0000
+     *********   0.0000*********   0.0000*********   0.0000*********   0.0000
+     *********
+0spline values at selected grid points
+0        y         0.0     0.4     0.8
+        x
+       0.0       0.2209  0.1619  0.6543
+       0.4     ************************
+       0.8     ************************

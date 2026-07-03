@@ -1,0 +1,16 @@
+At line 24 of file /Users/george/projects/aiport/sources/fitpack/ex/mnpola.f (unit = 5, file = 'stdin')
+Fortran runtime error: End of file
+
+Error termination. Backtrace:
+#0  0x10466b323
+#1  0x10466bef7
+#2  0x10466c7cb
+#3  0x10478be33
+#4  0x10478c397
+#5  0x104789773
+#6  0x10478d58b
+#7  0x10478e7eb
+#8  0x1041c8877
+#9  0x1041f1f5f
+1the input data
+0   x      y      z        x      y      z        x      y      z
