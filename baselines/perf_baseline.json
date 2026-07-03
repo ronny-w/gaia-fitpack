@@ -1,39 +1,192 @@
 {
-  "date": "2026-07-03T18:26:30Z",
-  "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
-  "os": "Darwin",
-  "arch": "arm64",
-  "optimisation": "-O2",
-  "note": "Wall time in seconds. Each test run 3 times, median recorded.",
-  "tests": {
-    "mnbisp": {"wall_sec": 0.0060, "runs": [0.2360, 0.0060, 0.0050]},
-    "mncloc": {"wall_sec": 0.0060, "runs": [0.2350, 0.0060, 0.0050]},
-    "mncoco": {"wall_sec": 0.0060, "runs": [0.2340, 0.0060, 0.0050]},
-    "mnconc": {"wall_sec": 0.0080, "runs": [0.2310, 0.0080, 0.0050]},
-    "mncosp": {"wall_sec": 0.0050, "runs": [0.2280, 0.0050, 0.0050]},
-    "mncual": {"wall_sec": 0.0060, "runs": [0.2370, 0.0060, 0.0050]},
-    "mncuev": {"wall_sec": 0.0050, "runs": [0.2360, 0.0050, 0.0040]},
-    "mncurf": {"wall_sec": 0.0060, "runs": [0.2350, 0.0060, 0.0040]},
-    "mndbin": {"wall_sec": 0.0050, "runs": [0.2290, 0.0050, 0.0050]},
-    "mnevpo": {"wall_sec": 0.0050, "runs": [0.2290, 0.0050, 0.0040]},
-    "mnfour": {"wall_sec": 0.0050, "runs": [0.2430, 0.0050, 0.0040]},
-    "mninst": {"wall_sec": 0.0060, "runs": [0.2370, 0.0060, 0.0050]},
-    "mnpade": {"wall_sec": 0.0050, "runs": [0.2380, 0.0040, 0.0050]},
-    "mnparc": {"wall_sec": 0.0060, "runs": [0.2340, 0.0060, 0.0040]},
-    "mnpasu": {"wall_sec": 0.0080, "runs": [0.2400, 0.0080, 0.0070]},
-    "mnperc": {"wall_sec": 0.0060, "runs": [0.2440, 0.0060, 0.0060]},
-    "mnpogr": {"wall_sec": 0.0070, "runs": [0.2360, 0.0070, 0.0060]},
-    "mnpola": {"wall_sec": 0.0060, "runs": [0.2410, 0.0060, 0.0050]},
-    "mnprof": {"wall_sec": 0.0050, "runs": [0.2320, 0.0050, 0.0050]},
-    "mnregr": {"wall_sec": 0.0060, "runs": [0.2350, 0.0060, 0.0030]},
-    "mnspal": {"wall_sec": 0.0060, "runs": [0.2370, 0.0060, 0.0040]},
-    "mnspde": {"wall_sec": 0.0060, "runs": [0.2300, 0.0060, 0.0040]},
-    "mnspev": {"wall_sec": 0.0050, "runs": [0.2340, 0.0050, 0.0040]},
-    "mnspgr": {"wall_sec": 0.0080, "runs": [0.2420, 0.0080, 0.0070]},
-    "mnsphe": {"wall_sec": 0.0060, "runs": [0.2360, 0.0060, 0.0060]},
-    "mnspin": {"wall_sec": 0.0050, "runs": [0.2420, 0.0050, 0.0040]},
-    "mnspro": {"wall_sec": 0.0060, "runs": [0.2370, 0.0060, 0.0040]},
-    "mnsuev": {"wall_sec": 0.0060, "runs": [0.2400, 0.0060, 0.0050]},
-    "mnsurf": {"wall_sec": 0.0060, "runs": [0.2350, 0.0060, 0.0050]}
+  "meta": {
+    "date": "2026-07-03T20:25:58Z",
+    "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+    "os": "Darwin",
+    "arch": "arm64",
+    "optimisation": "-O2",
+    "runs": 5,
+    "axes": ["wall_sec","cpu_sec","peak_kb","numerical_error_max"]
+  },
+  "implementations": {
+    "fortran_f77_O2": {
+      "description": "Original Dierckx Fortran 77, gfortran -O2",
+      "tests": {
+        "mnbisp": {
+          "wall_sec": 0.008983,
+          "peak_kb": 1824,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mncloc": {
+          "wall_sec": 0.009900,
+          "peak_kb": 1872,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mncoco": {
+          "wall_sec": 0.008633,
+          "peak_kb": 1872,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnconc": {
+          "wall_sec": 0.009818,
+          "peak_kb": 1904,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mncosp": {
+          "wall_sec": 0.009008,
+          "peak_kb": 1872,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mncual": {
+          "wall_sec": 0.009331,
+          "peak_kb": 1808,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mncuev": {
+          "wall_sec": 0.008811,
+          "peak_kb": 1776,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mncurf": {
+          "wall_sec": 0.009927,
+          "peak_kb": 1888,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mndbin": {
+          "wall_sec": 0.011451,
+          "peak_kb": 1824,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnevpo": {
+          "wall_sec": 0.013565,
+          "peak_kb": 1824,
+          "numerical_error_max": null,
+          "runs": 5
+        },
+        "mnfour": {
+          "wall_sec": 0.010758,
+          "peak_kb": 1808,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mninst": {
+          "wall_sec": 0.011757,
+          "peak_kb": 1856,
+          "numerical_error_max": null,
+          "runs": 5
+        },
+        "mnpade": {
+          "wall_sec": 0.010665,
+          "peak_kb": 1840,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnparc": {
+          "wall_sec": 0.013722,
+          "peak_kb": 1936,
+          "numerical_error_max": null,
+          "runs": 5
+        },
+        "mnpasu": {
+          "wall_sec": 0.010596,
+          "peak_kb": 1952,
+          "numerical_error_max": null,
+          "runs": 5
+        },
+        "mnperc": {
+          "wall_sec": 0.010036,
+          "peak_kb": 1936,
+          "numerical_error_max": null,
+          "runs": 5
+        },
+        "mnpogr": {
+          "wall_sec": 0.010987,
+          "peak_kb": 1952,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnpola": {
+          "wall_sec": 0.009792,
+          "peak_kb": 2528,
+          "numerical_error_max": 2.30e+01,
+          "runs": 5
+        },
+        "mnprof": {
+          "wall_sec": 0.008710,
+          "peak_kb": 1840,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnregr": {
+          "wall_sec": 0.010510,
+          "peak_kb": 1920,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnspal": {
+          "wall_sec": 0.009075,
+          "peak_kb": 1840,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnspde": {
+          "wall_sec": 0.010095,
+          "peak_kb": 1824,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnspev": {
+          "wall_sec": 0.009607,
+          "peak_kb": 1792,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnspgr": {
+          "wall_sec": 0.011339,
+          "peak_kb": 1968,
+          "numerical_error_max": null,
+          "runs": 5
+        },
+        "mnsphe": {
+          "wall_sec": 0.010209,
+          "peak_kb": 2496,
+          "numerical_error_max": null,
+          "runs": 5
+        },
+        "mnspin": {
+          "wall_sec": 0.009645,
+          "peak_kb": 1824,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnspro": {
+          "wall_sec": 0.009494,
+          "peak_kb": 1824,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnsuev": {
+          "wall_sec": 0.009711,
+          "peak_kb": 1824,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        },
+        "mnsurf": {
+          "wall_sec": 0.009684,
+          "peak_kb": 2000,
+          "numerical_error_max": 0.00e+00,
+          "runs": 5
+        }
+      }
+    }
   }
 }
