@@ -23,6 +23,7 @@ count_word() {
     return 0
 }
 
+# Fortran tests
 for TEST_SRC in "$EX_DIR"/safety_*.f; do
     STEM=$(basename "$TEST_SRC" .f)
     EXE="$BUILD_DIR/$STEM"
@@ -35,6 +36,31 @@ for TEST_SRC in "$EX_DIR"/safety_*.f; do
 
     OUTPUT=$("$EXE" 2>&1) || true
     printf "\n--- %s ---\n%s\n" "$STEM" "$OUTPUT"
+
+    P=0; F=0; I=0
+    while IFS= read -r line; do
+        case "$line" in
+            *PASS*) P=$((P+1)) ;;
+            *FAIL*) F=$((F+1)) ;;
+            *INFO*) I=$((I+1)) ;;
+        esac
+    done << HEREDOC
+$(printf "%s\n" "$OUTPUT")
+HEREDOC
+
+    PASS=$((PASS+P))
+    FAIL=$((FAIL+F))
+    INFO=$((INFO+I))
+done
+
+# Python tests
+for TEST_SRC in "$EX_DIR"/safety_*.py; do
+    [ -f "$TEST_SRC" ] || continue
+    STEM=$(basename "$TEST_SRC" .py)
+
+    printf "\n--- %s ---\n" "$STEM"
+    OUTPUT=$(python3 "$TEST_SRC" 2>&1) || true
+    printf "%s\n" "$OUTPUT"
 
     P=0; F=0; I=0
     while IFS= read -r line; do
