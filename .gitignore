@@ -1,2 +1,3 @@
 *.o
 libdierckx.a
+build/

@@ -1,189 +1,193 @@
 {
   "meta": {
-    "date": "2026-07-03T20:25:58Z",
+    "date": "2026-07-05T06:14:28Z",
     "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
     "os": "Darwin",
     "arch": "arm64",
     "optimisation": "-O2",
     "runs": 5,
-    "axes": ["wall_sec","cpu_sec","peak_kb","numerical_error_max"]
+    "axes": [
+      "wall_sec",
+      "peak_kb",
+      "numerical_error_max"
+    ]
   },
   "implementations": {
     "fortran_f77_O2": {
-      "description": "Original Dierckx Fortran 77, gfortran -O2",
+      "description": "Fortran 77, gfortran -O2",
       "tests": {
         "mnbisp": {
-          "wall_sec": 0.008983,
-          "peak_kb": 1824,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.004868,
+          "peak_kb": 75472,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mncloc": {
-          "wall_sec": 0.009900,
-          "peak_kb": 1872,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.008246,
+          "peak_kb": 75504,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mncoco": {
-          "wall_sec": 0.008633,
-          "peak_kb": 1872,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.009318,
+          "peak_kb": 75504,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnconc": {
-          "wall_sec": 0.009818,
-          "peak_kb": 1904,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.006269,
+          "peak_kb": 75504,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mncosp": {
-          "wall_sec": 0.009008,
-          "peak_kb": 1872,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.007691,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mncual": {
-          "wall_sec": 0.009331,
-          "peak_kb": 1808,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.008743,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mncuev": {
-          "wall_sec": 0.008811,
-          "peak_kb": 1776,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.004627,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mncurf": {
-          "wall_sec": 0.009927,
-          "peak_kb": 1888,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.007652,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mndbin": {
-          "wall_sec": 0.011451,
-          "peak_kb": 1824,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.007812,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnevpo": {
-          "wall_sec": 0.013565,
-          "peak_kb": 1824,
+          "wall_sec": 0.00702,
+          "peak_kb": 76496,
           "numerical_error_max": null,
           "runs": 5
         },
         "mnfour": {
-          "wall_sec": 0.010758,
-          "peak_kb": 1808,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.008597,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mninst": {
-          "wall_sec": 0.011757,
-          "peak_kb": 1856,
+          "wall_sec": 0.008091,
+          "peak_kb": 76496,
           "numerical_error_max": null,
           "runs": 5
         },
         "mnpade": {
-          "wall_sec": 0.010665,
-          "peak_kb": 1840,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.008694,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnparc": {
-          "wall_sec": 0.013722,
-          "peak_kb": 1936,
+          "wall_sec": 0.009022,
+          "peak_kb": 76496,
           "numerical_error_max": null,
           "runs": 5
         },
         "mnpasu": {
-          "wall_sec": 0.010596,
-          "peak_kb": 1952,
+          "wall_sec": 0.008625,
+          "peak_kb": 76496,
           "numerical_error_max": null,
           "runs": 5
         },
         "mnperc": {
-          "wall_sec": 0.010036,
-          "peak_kb": 1936,
+          "wall_sec": 0.008879,
+          "peak_kb": 76496,
           "numerical_error_max": null,
           "runs": 5
         },
         "mnpogr": {
-          "wall_sec": 0.010987,
-          "peak_kb": 1952,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.009183,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnpola": {
-          "wall_sec": 0.009792,
-          "peak_kb": 2528,
-          "numerical_error_max": 2.30e+01,
+          "wall_sec": 0.008049,
+          "peak_kb": 76496,
+          "numerical_error_max": 23.0,
           "runs": 5
         },
         "mnprof": {
-          "wall_sec": 0.008710,
-          "peak_kb": 1840,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.007585,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnregr": {
-          "wall_sec": 0.010510,
-          "peak_kb": 1920,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.009207,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnspal": {
-          "wall_sec": 0.009075,
-          "peak_kb": 1840,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.008467,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnspde": {
-          "wall_sec": 0.010095,
-          "peak_kb": 1824,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.006729,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnspev": {
-          "wall_sec": 0.009607,
-          "peak_kb": 1792,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.007793,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnspgr": {
-          "wall_sec": 0.011339,
-          "peak_kb": 1968,
+          "wall_sec": 0.009093,
+          "peak_kb": 76496,
           "numerical_error_max": null,
           "runs": 5
         },
         "mnsphe": {
-          "wall_sec": 0.010209,
-          "peak_kb": 2496,
+          "wall_sec": 0.00841,
+          "peak_kb": 76496,
           "numerical_error_max": null,
           "runs": 5
         },
         "mnspin": {
-          "wall_sec": 0.009645,
-          "peak_kb": 1824,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.008875,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnspro": {
-          "wall_sec": 0.009494,
-          "peak_kb": 1824,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.008987,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnsuev": {
-          "wall_sec": 0.009711,
-          "peak_kb": 1824,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.006797,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         },
         "mnsurf": {
-          "wall_sec": 0.009684,
-          "peak_kb": 2000,
-          "numerical_error_max": 0.00e+00,
+          "wall_sec": 0.009524,
+          "peak_kb": 76496,
+          "numerical_error_max": 0.0,
           "runs": 5
         }
       }
