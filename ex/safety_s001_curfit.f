@@ -1,4 +1,5 @@
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cc  Covers: REQ-ERR-001, REQ-ERR-002
 cc  safety_s001_curfit : input validation tests for CURFIT           cc
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       program safety_s001_curfit

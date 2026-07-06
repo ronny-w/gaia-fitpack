@@ -1,4 +1,5 @@
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cc  Covers: REQ-GEN-005, REQ-GEN-006, REQ-GEN-007
 cc  safety_s002_curfit : convergence tests for CURFIT                 cc
 cc  S002: Documents behavior for convergence-challenged inputs.       cc
 cc  minimum lwrk = m*(k+1) + nest*(7+3*k) = 20*4 + 60*16 = 1040     cc

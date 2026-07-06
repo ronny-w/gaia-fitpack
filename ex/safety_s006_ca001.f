@@ -1,4 +1,5 @@
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cc  Covers: REQ-GEN-004
 cc  Gap: CA001 - Code finding: Silent extrapolation in SPLEV
 cc  Pattern: behavior_observation
 cc  Routine: SPLEV(t, n, c, k, x, y, m, ier)

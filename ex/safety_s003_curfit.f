@@ -1,4 +1,5 @@
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cc  Covers: REQ-MEM-001, REQ-MEM-002
 cc  safety_s003_curfit : workspace size tests for CURFIT              cc
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       program safety_s003_curfit

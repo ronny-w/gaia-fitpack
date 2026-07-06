@@ -1,4 +1,5 @@
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cc  Covers: REQ-GEN-004, REQ-GEN-002
 cc  safety_s004_splev : numerical robustness tests for SPLEV          cc
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       program safety_s004_splev

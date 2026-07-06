@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """
+Covers: REQ-THREAD-001
+
 Gap: U001 - Unknown: Concurrent call thread safety
 Pattern: concurrency_python
 Tests CURFIT under true concurrent execution from N threads.

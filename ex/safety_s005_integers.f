@@ -1,4 +1,5 @@
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cc  Covers: REQ-GEN-001, REQ-INDEX-001, REQ-INDEX-002
 cc  safety_s005_integers : 32-bit integer limit documentation         cc
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       program safety_s005_integers

@@ -1,4 +1,5 @@
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cc  Covers: REQ-GEN-001, REQ-GEN-003
 cc  Gap: CA003 - Code finding: Division by near-zero in 16 internal
 cc  Pattern: behavior_observation
 cc  Routine: CURFIT(iopt, m, x, y, w, xb, xe, k, s, nest, n, t, c, fp,)
