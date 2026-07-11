@@ -1,3 +1,4 @@
 *.o
 libdierckx.a
 build/
+.DS_Store
