@@ -306,27 +306,32 @@ c  latest update : march 1989
 c
 c  ..
 c  ..scalar arguments..
-      real s,eps,fp
+      double precision s,eps,fp   ! DP: upgraded from REAL
       integer iopt,m,ntest,npest,nt,np,lwrk1,lwrk2,kwrk,ier
 c  ..array arguments..
-      real teta(m),phi(m),r(m),w(m),tt(ntest),tp(npest),
+      double precision teta(m),phi(m),r(m),w(m),tt(ntest),tp(npest),   ! DP: upgraded from REAL
      * c((ntest-4)*(npest-4)),wrk1(lwrk1),wrk2(lwrk2)
       integer iwrk(kwrk)
 c  ..local scalars..
-      real tol,pi,pi2,one
+      double precision tol,pi,pi2,one   ! DP: upgraded from REAL
       integer i,ib1,ib3,ki,kn,kwest,la,lbt,lcc,lcs,lro,j
      * lbp,lco,lf,lff,lfp,lh,lq,lst,lsp,lwest,maxit,ncest,ncc,ntt,
      * npp,nreg,nrint,ncof,nt4,np4
 c  ..function references..
-      real atan
+      double precision atan   ! DP: upgraded from REAL
 c  ..subroutine references..
 c    fpsphe
 c  ..
 c  set constants
-      one = 0.1e+01
+      one = 0.1D+01
 c  we set up the parameters tol and maxit.
       maxit = 20
-      tol = 0.1e-02
+c  patch_05: internal convergence tolerance tol adjusted from the
+c  single-precision value (0.1D-02) to 1.0D-10 for double precision
+c  arithmetic (approx sqrt(DBL_EPSILON)). the user-facing 'eps' argument
+c  (rank threshold, 0<eps<1) is a separate quantity and is intentionally
+c  left unchanged for backward compatibility.
+      tol = 1.0D-10
 c  before starting computations a data check is made. if the input data
 c  are invalid,control is immediately repassed to the calling program.
       ier = 10
@@ -362,14 +367,14 @@ c  are invalid,control is immediately repassed to the calling program.
       ntt = nt-8
       if(ntt.lt.0 .or. nt.gt.ntest) go to 80
       if(ntt.eq.0) go to 40
-      tt(4) = 0.
+      tt(4) = 0.D0
       do 30 i=1,ntt
          j = i+4
          if(tt(j).le.tt(j-1) .or. tt(j).ge.pi) go to 80
   30  continue
   40  npp = np-8
       if(npp.lt.1 .or. np.gt.npest) go to 80
-      tp(4) = 0.
+      tp(4) = 0.D0
       do 50 i=1,npp
          j = i+4
          if(tp(j).le.tp(j-1) .or. tp(j).ge.pi2) go to 80
@@ -401,4 +406,5 @@ c  we partition the working space and determine the spline approximation
      * wrk1(lh),iwrk(ki),iwrk(kn),wrk2,lwrk2,ier)
   80  return
       end
+
 

@@ -5,18 +5,19 @@ c  to the (m) x (mm) x (idim) matrix z to obtain the (n-7) x (mm) x
 c  (idim) matrix q.
 c  ..
 c  ..scalar arguments..
-      real p
+      double precision p   ! DP: upgraded from REAL
       integer m,mm,idim,n
 c  ..array arguments..
-      real sp(m,4),b(n,5),z(m*mm*idim),a(n,5),aa(n,4),q((n-7)*mm*idim),
+      double precision sp(m,4),b(n,5),z(m*mm*idim),a(n,5),aa(n,4),
+     * q((n-7)*mm*idim),! DP: upgraded from REAL
      * right(mm*idim)
       integer nr(m)
 c  ..local scalars..
-      real co,pinv,piv,si,one
+      double precision co,pinv,piv,si,one   ! DP: upgraded from REAL
       integer i,iband,irot,it,ii,i2,i3,j,jj,l,mid,nmd,m2,m3,
      * nrold,n4,number,n1,n7,n11,m1
 c  ..local arrays..
-      real h(5),h1(5),h2(4)
+      double precision h(5),h1(5),h2(4)   ! DP: upgraded from REAL
 c  ..subroutine references..
 c    fpgivs,fprota
 c  ..
@@ -43,13 +44,13 @@ c  triangular matrix of bandwidth 5.
 c  initialization.
       nmd = n7*mid
       do 50 i=1,nmd
-        q(i) = 0.
+        q(i) = 0.D0
   50  continue
       do 100 i=1,n4
-        a(i,5) = 0.
+        a(i,5) = 0.D0
         do 100 j=1,4
-          a(i,j) = 0.
-          aa(i,j) = 0.
+          a(i,j) = 0.D0
+          aa(i,j) = 0.D0
  100  continue
       jper = 0
       nrold = 0
@@ -64,11 +65,11 @@ c  fetch a new row of matrix (b).
  140    continue
 c  find the appropiate row of q.
         do 160 j=1,mid
-          right(j) = 0.
+          right(j) = 0.D0
  160    continue
         go to 240
 c  fetch a new row of matrix (sp)
- 180    h(5) = 0.
+ 180    h(5) = 0.D0
         do 200 j=1,4
           h(j) = sp(it,j)
  200    continue
@@ -101,10 +102,10 @@ c  if one of the non-zero elements of the new row corresponds to one of
 c  the b-splines n(j;*),j=n7+1,...,n4,we take account of the periodicity
 c  conditions for setting up this row of (a).
  320     do 340 i=1,4
-            h1(i) = 0.
-            h2(i) = 0.
+            h1(i) = 0.D0
+            h2(i) = 0.D0
  340     continue
-         h1(5) = 0.
+         h1(5) = 0.D0
          j = nrold-n11
          do 420 i=1,5
             j = j+1
@@ -149,7 +150,7 @@ c  apply that transformation to the rows of (a) with respect to a.
  500        do 520 i=1,i2
                h1(i) = h1(i+1)
  520        continue
-            h1(i2+1) = 0.
+            h1(i2+1) = 0.D0
  540     continue
 c  rotations with the rows n11+1,...,n7 of a.
  560     do 620 irot=1,4
@@ -209,3 +210,4 @@ c  apply that transformation to the rows of (a).
  760  continue
       return
       end
+

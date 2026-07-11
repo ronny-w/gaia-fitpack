@@ -2,3 +2,5 @@
 libdierckx.a
 build/
 .DS_Store
+RECOMMENDATIONS.md
+baselines/perf_baseline.json

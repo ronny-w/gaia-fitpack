@@ -2,32 +2,34 @@
      * n,t,nc,c,fp,fpint,z,a1,a2,b,g1,g2,q,nrdata,ier)
 c  ..
 c  ..scalar arguments..
-      real s,tol,fp
+      double precision s,tol,fp   ! DP: upgraded from REAL
       integer iopt,idim,m,mx,k,nest,maxit,k1,k2,n,nc,ier
 c  ..array arguments..
-      real u(m),x(mx),w(m),t(nest),c(nc),fpint(nest),z(nc),a1(nest,k1),
+      double precision u(m),x(mx),w(m),t(nest),c(nc),fpint(nest),z(nc),
+     * a1(nest,k1),! DP: upgraded from REAL
      * a2(nest,k),b(nest,k2),g1(nest,k2),g2(nest,k1),q(m,k1)
       integer nrdata(nest)
 c  ..local scalars..
-      real acc,cos,d1,fac,fpart,fpms,fpold,fp0,f1,f2,f3,p,per,pinv,piv,
+      double precision acc,cos,d1,fac,fpart,fpms,fpold,fp0,f1,f2,f3,p,
+     * per,pinv,piv,! DP: upgraded from REAL
      * p1,p2,p3,sin,store,term,ui,wi,rn,one,con1,con4,con9,half
       integer i,ich1,ich3,ij,ik,it,iter,i1,i2,i3,j,jj,jk,jper,j1,j2,kk,
      * kk1,k3,l,l0,l1,l5,mm,m1,new,nk1,nk2,nmax,nmin,nplus,npl1,
      * nrint,n10,n11,n7,n8
 c  ..local arrays..
-      real h(6),h1(7),h2(6),xi(10)
+      double precision h(6),h1(7),h2(6),xi(10)   ! DP: upgraded from REAL
 c  ..function references..
-      real abs,fprati
+      double precision abs,fprati   ! DP: upgraded from REAL
       integer max0,min0
 c  ..subroutine references..
 c    fpbacp,fpbspl,fpgivs,fpdisc,fpknot,fprota
 c  ..
 c  set constants
-      one = 0.1e+01
-      con1 = 0.1e0
-      con9 = 0.9e0
-      con4 = 0.4e-01
-      half = 0.5e0
+      one = 0.1D+01
+      con1 = 0.1D0
+      con9 = 0.9D0
+      con4 = 0.4D-01
+      half = 0.5D0
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c  part 1: determination of the number of knots and their position     c
 c  **************************************************************      c
@@ -96,9 +98,9 @@ c  find the position of the interior knots in case of interpolation.
         j = j+n
         jj = jj+n
   17  continue
-      fp = 0.
+      fp = 0.D0
       fpint(n) = fp0
-      fpint(n-1) = 0.
+      fpint(n-1) = 0.D0
       nrdata(n) = 0
       go to 630
   20  do 25 i=2,m1
@@ -120,10 +122,10 @@ c  routine.
       if(fp0.gt.s) go to 50
 c  the case that s(u) is a fixed point is treated separetely.
 c  fp0 denotes the corresponding sum of squared residuals.
-  35  fp0 = 0.
-      d1 = 0.
+  35  fp0 = 0.D0
+      d1 = 0.D0
       do 37 j=1,idim
-        z(j) = 0.
+        z(j) = 0.D0
   37  continue
       jj = 0
       do 45 it=1,m1
@@ -192,16 +194,16 @@ c  with a2 a n7 x k matrix and a1 a n10 x n10 upper triangular
 c  matrix of bandwith k+1 ( n10 = n7-k).
 c  initialization.
         do 65 i=1,nc
-          z(i) = 0.
+          z(i) = 0.D0
   65    continue
         do 70 i=1,nk1
           do 70 j=1,kk1
-            a1(i,j) = 0.
+            a1(i,j) = 0.D0
   70    continue
         n7 = nk1-k
         n10 = n7-kk
         jper = 0
-        fp = 0.
+        fp = 0.D0
         l = k1
         jj = 0
         do 290 it=1,m1
@@ -229,7 +231,7 @@ c  test whether the b-splines nj,k+1(u),j=1+n7,...nk1 are all zero at ui
 c  initialize the matrix a2.
           do 95 i=1,n7
           do 95 j=1,kk
-              a2(i,j) = 0.
+              a2(i,j) = 0.D0
   95      continue
           jk = n10+1
           do 110 i=1,kk
@@ -248,10 +250,10 @@ c  of the observation matrix a. this row is stored in the arrays h1
 c  (the part with respect to a1) and h2 (the part with
 c  respect to a2).
  160      do 170 i=1,kk
-            h1(i) = 0.
-            h2(i) = 0.
+            h1(i) = 0.D0
+            h2(i) = 0.D0
  170      continue
-          h1(kk1) = 0.
+          h1(kk1) = 0.D0
           j = l5-n10
           do 210 i=1,kk1
             j = j+1
@@ -275,7 +277,7 @@ c  rotation with the rows 1,2,...n10 of matrix a.
             do 212 i=1,kk
               h1(i) = h1(i+1)
  212        continue
-            h1(kk1) = 0.
+            h1(kk1) = 0.D0
             go to 240
 c  calculate the parameters of the givens transformation.
  214        call fpgivs(piv,a1(j,1),cos,sin)
@@ -297,7 +299,7 @@ c  transformations to the left hand side with respect to a1.
               call fprota(cos,sin,h1(i1),a1(j,i1))
               h1(i) = h1(i1)
  230        continue
-            h1(i1) = 0.
+            h1(i1) = 0.D0
  240      continue
 c  rotation with the rows n10+1,...n7 of matrix a.
  250      do 270 j=1,kk
@@ -395,7 +397,7 @@ c  determine the number of knots nplus we are going to add.
         fpold = fp
 c  compute the sum of squared residuals for each knot interval
 c  t(j+k) <= ui <= t(j+k+1) and store it in fpint(j),j=1,2,...nrint.
-        fpart = 0.
+        fpart = 0.D0
         i = 1
         l = k1
         jj = 0
@@ -403,10 +405,10 @@ c  t(j+k) <= ui <= t(j+k+1) and store it in fpint(j),j=1,2,...nrint.
           if(u(it).lt.t(l)) go to 300
           new = 1
           l = l+1
- 300      term = 0.
+ 300      term = 0.D0
           l0 = l-k2
           do 310 j2=1,idim
-            fac = 0.
+            fac = 0.D0
             j1 = l0
             do 305 j=1,k1
               j1 = j1+1
@@ -464,13 +466,13 @@ c  evaluate the discontinuity jump of the kth derivative of the
 c  b-splines at the knots t(l),l=k+2,...n-k-1 and store in b.
  350  call fpdisc(t,n,k2,b,nest)
 c  initial value for p.
-      p1 = 0.
+      p1 = 0.D0
       f1 = fp0-s
       p3 = -one
       f3 = fpms
       n11 = n10-1
       n8 = n7-1
-      p = 0.
+      p = 0.D0
       l = n7
       do 352 i=1,k
          j = k+1-i
@@ -503,8 +505,8 @@ c  store matrix a into g
  358    continue
         do 360 i=1,n7
           g1(i,k1) = a1(i,k1)
-          g1(i,k2) = 0.
-          g2(i,1) = 0.
+          g1(i,k2) = 0.D0
+          g2(i,1) = 0.D0
           do 360 j=1,k
             g1(i,j) = a1(i,j)
             g2(i,j+1) = a2(i,j)
@@ -519,13 +521,13 @@ c  store matrix a into g
 c  fetch a new row of matrix b and store it in the arrays h1 (the part
 c  with respect to g1) and h2 (the part with respect to g2).
           do 380 j=1,idim
-            xi(j) = 0.
+            xi(j) = 0.D0
  380      continue
           do 385 i=1,k1
-            h1(i) = 0.
-            h2(i) = 0.
+            h1(i) = 0.D0
+            h2(i) = 0.D0
  385      continue
-          h1(k2) = 0.
+          h1(k2) = 0.D0
           if(it.gt.n11) go to 420
           l = it
           l0 = it
@@ -580,7 +582,7 @@ c  transformation to the left hand side with respect to g1.
               call fprota(cos,sin,h1(i1),g1(j,i1))
               h1(i) = h1(i1)
  490        continue
-            h1(i1) = 0.
+            h1(i1) = 0.D0
  500      continue
 c  rotation with the rows n11+1,...n7
  510      do 530 j=1,k1
@@ -619,16 +621,16 @@ c  calculate from condition (**) the remaining b-spline coefficients.
  545      continue
  547    continue
 c  computation of f(p).
-        fp = 0.
+        fp = 0.D0
         l = k1
         jj = 0
         do 570 it=1,m1
           if(u(it).lt.t(l)) go to 550
           l = l+1
  550      l0 = l-k2
-          term = 0.
+          term = 0.D0
           do 565 j2=1,idim
-            fac = 0.
+            fac = 0.D0
             j1 = l0
             do 560 j=1,k1
               j1 = j1+1
@@ -706,7 +708,8 @@ c  coefficients equal to that constant.
  658  continue
       fp = fp0
       fpint(n) = fp0
-      fpint(n-1) = 0.
+      fpint(n-1) = 0.D0
       nrdata(n) = 0
  660  return
       end
+

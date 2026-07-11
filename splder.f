@@ -1,4 +1,13 @@
       subroutine splder(t,n,c,k,nu,x,y,m,wrk,ier)
+c  ======================================================================
+c  WARNING (fork doc, patch_02): the array x MUST be supplied in
+c  non-decreasing order. this routine performs a SEQUENTIAL knot-interval
+c  search that assumes monotonic x. unsorted input produces INCORRECT
+c  results. splev returns ier=10 if a strict decrease x(i)<x(i-1) is
+c  detected, but no full sort validation is performed (v1 fork: no
+c  behavioral change, documentation only). note also (CA001): x-values
+c  outside [t(k+1),t(n-k)] are silently clamped/extrapolated with ier=0.
+c  ======================================================================
 c  subroutine splder evaluates in a number of points x(i),i=1,2,...,m
 c  the derivative of order nu of a spline s(x) of degree k,given in
 c  its b-spline representation.
@@ -51,12 +60,12 @@ c
 c  ..scalar arguments..
       integer n,k,nu,m,ier
 c  ..array arguments..
-      real t(n),c(n),x(m),y(m),wrk(n)
+      double precision t(n),c(n),x(m),y(m),wrk(n)   ! DP: upgraded from REAL
 c  ..local scalars..
       integer i,j,kk,k1,k2,l,ll,l1,l2,nk1,nk2,nn
-      real ak,arg,fac,sp,tb,te
+      double precision ak,arg,fac,sp,tb,te   ! DP: upgraded from REAL
 c  ..local arrays ..
-      real h(6)
+      double precision h(6)   ! DP: upgraded from REAL
 c  before starting computations a data check is made. if the input data
 c  are invalid control is immediately repassed to the calling program.
       ier = 10
@@ -118,6 +127,7 @@ c  fetch a new x-value arg.
         if(arg.lt.tb) arg = tb
         if(arg.gt.te) arg = te
 c  search for knot interval t(l) <= arg < t(l+1)
+c  patch_02: sequential search below REQUIRES non-decreasing x (see header)
  140    if(arg.lt.t(l1) .or. l.eq.nk1) go to 150
         l = l1
         l1 = l+1
@@ -125,7 +135,7 @@ c  search for knot interval t(l) <= arg < t(l+1)
 c  evaluate the non-zero b-splines of degree k-nu at arg.
  150    call fpbspl(t,n,kk,arg,l,h)
 c  find the value of the derivative at x=arg.
-        sp = 0.
+        sp = 0.D0
         ll = l-k1
         do 160 j=1,k2
           ll = ll+1
@@ -135,3 +145,4 @@ c  find the value of the derivative at x=arg.
  180  continue
  200  return
       end
+

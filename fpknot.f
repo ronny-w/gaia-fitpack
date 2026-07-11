@@ -13,10 +13,10 @@ c  ..
 c  ..scalar arguments..
       integer m,n,nrint,nest,istart
 c  ..array arguments..
-      real x(m),t(nest),fpint(nest)
+      double precision x(m),t(nest),fpint(nest)   ! DP: upgraded from REAL
       integer nrdata(nest)
 c  ..local scalars..
-      real an,am,fpmax
+      double precision an,am,fpmax   ! DP: upgraded from REAL
       integer ihalf,j,jbegin,jj,jk,jpoint,k,maxbeg,maxpt,
      * next,nrx,number
 c  ..
@@ -24,7 +24,7 @@ c  ..
 c  search for knot interval t(number+k) <= x <= t(number+k+1) where
 c  fpint(number) is maximal on the condition that nrdata(number)
 c  not equals zero.
-      fpmax = 0.
+      fpmax = 0.D0
       jbegin = istart
       do 20 j=1,nrint
         jpoint = nrdata(j)
@@ -62,3 +62,4 @@ c  adjust the different parameters.
       nrint = nrint+1
       return
       end
+

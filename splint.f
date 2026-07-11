@@ -1,4 +1,10 @@
-      real function splint(t,n,c,k,a,b,wrk)
+      double precision function splint(t,n,c,k,a,b,wrk)   ! DP: upgraded from REAL
+c  ======================================================================
+c  WARNING (fork doc, patch_02): splint assumes the knot array t is in
+c  non-decreasing order (standard b-spline representation as produced by
+c  curfit). unsorted knots produce incorrect integrals without error.
+c  v1 fork: documentation only, no behavioral change.
+c  ======================================================================
 c  function splint calculates the integral of a spline function s(x)
 c  of degree k, which is given in its normalized b-spline representation
 c
@@ -38,10 +44,10 @@ c
 c  latest update : march 1987
 c
 c  ..scalar arguments..
-      real a,b
+      double precision a,b   ! DP: upgraded from REAL
       integer n,k
 c  ..array arguments..
-      real t(n),c(n),wrk(n)
+      double precision t(n),c(n),wrk(n)   ! DP: upgraded from REAL
 c  ..local scalars..
       integer i,nk1
 c  ..
@@ -50,9 +56,10 @@ c  calculate the integrals wrk(i) of the normalized b-splines
 c  ni,k+1(x), i=1,2,...nk1.
       call fpintb(t,n,wrk,nk1,a,b)
 c  calculate the integral of s(x).
-      splint = 0.
+      splint = 0.D0
       do 10 i=1,nk1
         splint = splint+c(i)*wrk(i)
   10  continue
       return
       end
+

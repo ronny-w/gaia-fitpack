@@ -44,18 +44,19 @@ c
 c  ..scalar arguments..
       integer ifsu,ifsv,ifbu,ifbv,mu,mv,mz,nu,nv,nuest,nvest,
      * nc,lwrk
-      real z0,p,step,fp
+      double precision z0,p,step,fp   ! DP: upgraded from REAL
 c  ..array arguments..
       integer ider(2),nru(mu),nrv(mv),iopt(3)
-      real u(mu),v(mv),z(mz),dz(3),tu(nu),tv(nv),c(nc),fpu(nu),fpv(nv),
+      double precision u(mu),v(mv),z(mz),dz(3),tu(nu),tv(nv),c(nc),
+     * fpu(nu),fpv(nv),! DP: upgraded from REAL
      * wrk(lwrk)
 c  ..local scalars..
-      real res,sq,sqq,step1,step2,three
+      double precision res,sq,sqq,step1,step2,three   ! DP: upgraded from REAL
       integer i,id0,iop0,iop1,i1,j,l,laa,lau,lav1,lav2,lbb,lbu,lbv,
      * lcc,lcs,lq,lri,lsu,lsv,l1,l2,mm,mvnu,number
 c  ..local arrays..
       integer nr(3)
-      real delta(3),dzz(3),sum(3),a(6,6),g(6)
+      double precision delta(3),dzz(3),sum(3),a(6,6),g(6)   ! DP: upgraded from REAL
 c  ..function references..
       integer max0
 c  ..subroutine references..
@@ -178,3 +179,4 @@ c we determine the spline sp(u,v) according to the optimal values g(j).
       if(id0.eq.0) fp = fp+(z0-dz(1))**2
       return
       end
+

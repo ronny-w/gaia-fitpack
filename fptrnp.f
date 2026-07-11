@@ -5,18 +5,19 @@ c  the (m) x (mm) x (idim) matrix z to obtain the (n-4) x (mm) x
 c  (idim) matrix q
 c  ..
 c  ..scalar arguments..
-      real p
+      double precision p   ! DP: upgraded from REAL
       integer m,mm,idim,n
 c  ..array arguments..
-      real sp(m,4),b(n,5),z(m*mm*idim),a(n,5),q((n-4)*mm*idim),
+      double precision sp(m,4),b(n,5),z(m*mm*idim),a(n,5),
+     * q((n-4)*mm*idim),! DP: upgraded from REAL
      * right(mm*idim)
       integer nr(m)
 c  ..local scalars..
-      real cos,pinv,piv,sin,one
+      double precision cos,pinv,piv,sin,one   ! DP: upgraded from REAL
       integer i,iband,irot,it,ii,i2,i3,j,jj,l,mid,nmd,m2,m3,
      * nrold,n4,number,n1
 c  ..local arrays..
-      real h(7)
+      double precision h(7)   ! DP: upgraded from REAL
 c  ..subroutine references..
 c    fpgivs,fprota
 c  ..
@@ -33,11 +34,11 @@ c  store matrix (r) into (a) and g into q.
 c  initialization.
       nmd = n4*mid
       do 50 i=1,nmd
-        q(i) = 0.
+        q(i) = 0.D0
   50  continue
       do 100 i=1,n4
         do 100 j=1,5
-          a(i,j) = 0.
+          a(i,j) = 0.D0
  100  continue
       nrold = 0
 c  iband denotes the bandwidth of the matrices (a) and (r).
@@ -54,12 +55,12 @@ c  fetch a new row of matrix (b).
  200    continue
 c  find the appropriate column of q.
         do 250 j=1,mid
-          right(j) = 0.
+          right(j) = 0.D0
  250    continue
         irot = nrold
         go to 450
 c  fetch a new row of matrix (sp).
- 300    h(iband) = 0.
+ 300    h(iband) = 0.D0
         do 350 j=1,4
           h(j) = sp(it,j)
  350    continue
@@ -104,3 +105,4 @@ c  apply that transformation to the columns of (a).
  750  continue
       return
       end
+

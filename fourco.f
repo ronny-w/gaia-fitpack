@@ -1,4 +1,11 @@
       subroutine fourco(t,n,c,alfa,m,ress,resc,wrk1,wrk2,ier)
+c  ======================================================================
+c  WARNING (fork doc, patch_06 — known numerical limitation):
+c  for large frequencies alpha, the trigonometric recurrence in fpcsin
+c  may lose accuracy due to cancellation. accuracy degrades when
+c  alpha*(t(n-3)-t(4)) >> 1. no fix is planned; users should validate
+c  results for large alpha.
+c  ======================================================================
 c  subroutine fourco calculates the integrals
 c                    /t(n-3)
 c    ress(i) =      !        s(x)*sin(alfa(i)*x) dx    and
@@ -54,10 +61,10 @@ c
 c  ..scalar arguments..
       integer n,m,ier
 c  ..array arguments..
-      real t(n),c(n),wrk1(n),wrk2(n),alfa(m),ress(m),resc(m)
+      double precision t(n),c(n),wrk1(n),wrk2(n),alfa(m),ress(m),resc(m)   ! DP: upgraded from REAL
 c  ..local scalars..
       integer i,j,n4
-      real rs,rc
+      double precision rs,rc   ! DP: upgraded from REAL
 c  ..
       n4 = n-4
 c  before starting computations a data check is made. in the input data
@@ -83,8 +90,8 @@ c  where nj,4(x) denotes the normalised cubic b-spline defined on the
 c  knots t(j),t(j+1),...,t(j+4).
          call fpbfou(t,n,alfa(i),wrk1,wrk2)
 c  calculate the integrals ress(i) and resc(i).
-         rs = 0.
-         rc = 0.
+         rs = 0.D0
+         rc = 0.D0
          do 30 j=1,n4
             rs = rs+c(j)*wrk1(j)
             rc = rc+c(j)*wrk2(j)
@@ -94,3 +101,4 @@ c  calculate the integrals ress(i) and resc(i).
   40  continue
   50  return
       end
+

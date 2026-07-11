@@ -3,31 +3,33 @@
      * fpintv,lastdi,nplusu,nplusv,nru,nrv,nrdatu,nrdatv,wrk,lwrk,ier)
 c  ..
 c  ..scalar arguments..
-      real s,tol,fp,fp0,fpold,reducu,reducv
+      double precision s,tol,fp,fp0,fpold,reducu,reducv   ! DP: upgraded from REAL
       integer iopt,idim,mu,mv,mz,nuest,nvest,maxit,nc,nu,nv,lastdi,
      * nplusu,nplusv,lwrk,ier
 c  ..array arguments..
-      real u(mu),v(mv),z(mz*idim),tu(nuest),tv(nvest),c(nc*idim),
+      double precision u(mu),v(mv),z(mz*idim),tu(nuest),tv(nvest),
+     * c(nc*idim),! DP: upgraded from REAL
      * fpintu(nuest),fpintv(nvest),wrk(lwrk)
       integer ipar(2),nrdatu(nuest),nrdatv(nvest),nru(mu),nrv(mv)
 c  ..local scalars
-      real acc,fpms,f1,f2,f3,p,p1,p2,p3,rn,one,con1,con9,con4,
+      double precision acc,fpms,f1,f2,f3,p,p1,p2,p3,rn,one,con1,con9,
+     * con4,! DP: upgraded from REAL
      * peru,perv,ub,ue,vb,ve
       integer i,ich1,ich3,ifbu,ifbv,ifsu,ifsv,iter,j,lau1,lav1,laa,
      * l,lau,lav,lbu,lbv,lq,lri,lsu,lsv,l1,l2,l3,l4,mm,mpm,mvnu,ncof,
      * nk1u,nk1v,nmaxu,nmaxv,nminu,nminv,nplu,nplv,npl1,nrintu,
      * nrintv,nue,nuk,nve,nuu,nvv
 c  ..function references..
-      real abs,fprati
+      double precision abs,fprati   ! DP: upgraded from REAL
       integer max0,min0
 c  ..subroutine references..
 c    fpgrpa,fpknot
 c  ..
 c   set constants
       one = 1
-      con1 = 0.1e0
-      con9 = 0.9e0
-      con4 = 0.4e-01
+      con1 = 0.1D0
+      con9 = 0.9D0
+      con4 = 0.4D-01
 c  set boundaries of the approximation domain
       ub = u(1)
       ue = u(mu)
@@ -161,10 +163,10 @@ c  polynomial (which is a spline without interior knots).
       lastdi = 0
       nplusu = 0
       nplusv = 0
-      fp0 = 0.
-      fpold = 0.
-      reducu = 0.
-      reducv = 0.
+      fp0 = 0.D0
+      fpold = 0.D0
+      reducu = 0.D0
+      reducv = 0.D0
  100  mpm = mu+mv
       ifsu = 0
       ifsv = 0
@@ -326,7 +328,7 @@ c  are used to calculate the new value of p such that r(p)=s.          c
 c  convergence is guaranteed by taking f1 > 0 and f3 < 0.              c
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c  initial value for p.
-      p1 = 0.
+      p1 = 0.D0
       f1 = fp0-s
       p3 = -one
       f3 = fpms
@@ -383,6 +385,7 @@ c  error codes and messages.
  420  ier = 1
       go to 440
  430  ier = -1
-      fp = 0.
+      fp = 0.D0
  440  return
       end
+

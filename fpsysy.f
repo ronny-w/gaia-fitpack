@@ -7,9 +7,9 @@ c  ..
 c  ..scalar arguments..
       integer n
 c  ..array arguments..
-      real a(6,6),g(6)
+      double precision a(6,6),g(6)   ! DP: upgraded from REAL
 c  ..local scalars..
-      real fac
+      double precision fac   ! DP: upgraded from REAL
       integer i,i1,j,k
 c  ..
       g(1) = g(1)/a(1,1)

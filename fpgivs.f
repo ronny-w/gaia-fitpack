@@ -3,13 +3,13 @@ c  subroutine fpgivs calculates the parameters of a givens
 c  transformation .
 c  ..
 c  ..scalar arguments..
-      real piv,ww,cos,sin
+      double precision piv,ww,cos,sin   ! DP: upgraded from REAL
 c  ..local scalars..
-      real dd,one,store
+      double precision dd,one,store   ! DP: upgraded from REAL
 c  ..function references..
-      real abs,sqrt
+      double precision abs,sqrt   ! DP: upgraded from REAL
 c  ..
-      one = 0.1e+01
+      one = 0.1D+01
       store = abs(piv)
       if(store.ge.ww) dd = store*sqrt(one+(ww/piv)**2)
       if(store.lt.ww) dd = ww*sqrt(one+(piv/ww)**2)
@@ -18,3 +18,4 @@ c  ..
       ww = dd
       return
       end
+

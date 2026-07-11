@@ -13,9 +13,9 @@ c  ..
 c  ..scalar arguments..
       integer n,nn
 c  ..array arguments..
-      real a(nn,6)
+      double precision a(nn,6)   ! DP: upgraded from REAL
 c  ..local scalars..
-      real aa,beta,gamma,sum,teta,v,one
+      double precision aa,beta,gamma,sum,teta,v,one   ! DP: upgraded from REAL
       integer i,n1,n2
 c  ..
 c  set constant
@@ -51,3 +51,4 @@ c  set constant
       a(n,4) = one/(a(n,2)-(sum+gamma*teta))
       return
       end
+

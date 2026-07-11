@@ -9,10 +9,10 @@ c  ..
 c  ..scalar arguments..
       integer m,kx,ky,nx,ny,nreg
 c  ..array arguments..
-      real x(m),y(m),tx(nx),ty(ny)
+      double precision x(m),y(m),tx(nx),ty(ny)   ! DP: upgraded from REAL
       integer nummer(m),index(nreg)
 c  ..local scalars..
-      real xi,yi
+      double precision xi,yi   ! DP: upgraded from REAL
       integer i,im,k,kx1,ky1,k1,l,l1,nk1x,nk1y,num,nyy
 c  ..
       kx1 = kx+1

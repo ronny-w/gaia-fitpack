@@ -1,12 +1,12 @@
-      real function fprati(p1,f1,p2,f2,p3,f3)
+      double precision function fprati(p1,f1,p2,f2,p3,f3)   ! DP: upgraded from REAL
 c  given three points (p1,f1),(p2,f2) and (p3,f3), function fprati
 c  gives the value of p such that the rational interpolating function
 c  of the form r(p) = (u*p+v)/(p+w) equals zero at p.
 c  ..
 c  ..scalar arguments..
-      real p1,f1,p2,f2,p3,f3
+      double precision p1,f1,p2,f2,p3,f3   ! DP: upgraded from REAL
 c  ..local scalars..
-      real h1,h2,h3,p
+      double precision h1,h2,h3,p   ! DP: upgraded from REAL
 c  ..
       if(p3.gt.0.) go to 10
 c  value of p in case p3 = infinity.
@@ -27,3 +27,4 @@ c  adjust the value of p1,f1,p3 and f3 such that f1 > 0 and f3 < 0.
   40  fprati = p
       return
       end
+

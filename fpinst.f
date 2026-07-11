@@ -10,14 +10,14 @@ c  one of the following conditions must be fulfilled: l>2*k or l<n-2*k.
 c
 c  ..scalar arguments..
       integer k,n,l,nn,iopt,nest
-      real x
+      double precision x   ! DP: upgraded from REAL
 c  ..array arguments..
-      real t(nest),c(nest),tt(nest),cc(nest)
+      double precision t(nest),c(nest),tt(nest),cc(nest)   ! DP: upgraded from REAL
 c  ..local scalars..
-      real fac,per,one
+      double precision fac,per,one   ! DP: upgraded from REAL
       integer i,i1,j,k1,m,mk,nk,nk1,nl,ll
 c  ..
-      one = 0.1e+01
+      one = 0.1D+01
       k1 = k+1
       nk1 = n-k1
 c  the new knots
@@ -75,3 +75,4 @@ c   incorporate the boundary conditions for a periodic spline.
   80  continue
       return
       end
+

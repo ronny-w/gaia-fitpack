@@ -1,4 +1,9 @@
       subroutine fpader(t,n,c,k1,x,l,d)
+c  ======================================================================
+c  WARNING (fork doc, patch_06 — known limitation):
+c  local arrays of size 6 impose a hard limit k<=5 (spline degree).
+c  to support higher degrees, these fixed-size arrays must be generalized.
+c  ======================================================================
 c  subroutine fpader calculates the derivatives
 c             (j-1)
 c     d(j) = s     (x) , j=1,2,...,k1
@@ -6,17 +11,17 @@ c  of a spline of order k1 at the point t(l)<=x<t(l+1), using the
 c  stable recurrence scheme of de boor
 c  ..
 c  ..scalar arguments..
-      real x
+      double precision x   ! DP: upgraded from REAL
       integer n,k1,l
 c  ..array arguments..
-      real t(n),c(n),d(k1)
+      double precision t(n),c(n),d(k1)   ! DP: upgraded from REAL
 c  ..local scalars..
       integer i,ik,j,jj,j1,j2,ki,kj,li,lj,lk
-      real ak,fac,one
+      double precision ak,fac,one   ! DP: upgraded from REAL
 c  ..local array..
-      real h(6)
+      double precision h(6)   ! DP: upgraded from REAL
 c  ..
-      one = 0.1e+01
+      one = 0.1D+01
       lk = l-k1
       do 100 i=1,k1
         ik = i+lk
@@ -55,3 +60,4 @@ c  ..
  700  continue
       return
       end
+

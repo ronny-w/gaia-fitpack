@@ -1,4 +1,13 @@
       subroutine splev(t,n,c,k,x,y,m,ier)
+c  ======================================================================
+c  WARNING (fork doc, patch_02): the array x MUST be supplied in
+c  non-decreasing order. this routine performs a SEQUENTIAL knot-interval
+c  search that assumes monotonic x. unsorted input produces INCORRECT
+c  results. splev returns ier=10 if a strict decrease x(i)<x(i-1) is
+c  detected, but no full sort validation is performed (v1 fork: no
+c  behavioral change, documentation only). note also (CA001): x-values
+c  outside [t(k+1),t(n-k)] are silently clamped/extrapolated with ier=0.
+c  ======================================================================
 c  subroutine splev evaluates in a number of points x(i),i=1,2,...,m
 c  a spline s(x) of degree k, given in its b-spline representation.
 c
@@ -11,7 +20,8 @@ c    n    : integer, giving the total number of knots of s(x).
 c    c    : array,length n, which contains the b-spline coefficients.
 c    k    : integer, giving the degree of s(x).
 c    x    : array,length m, which contains the points where s(x) must
-c           be evaluated.
+c           be evaluated. x must be provided in non-decreasing order;
+c           unsorted input produces incorrect results without error.
 c    m    : integer, giving the number of points where s(x) must be
 c           evaluated.
 c
@@ -47,12 +57,12 @@ c
 c  ..scalar arguments..
       integer n,k,m,ier
 c  ..array arguments..
-      real t(n),c(n),x(m),y(m)
+      double precision t(n),c(n),x(m),y(m)   ! DP: upgraded from REAL
 c  ..local scalars..
       integer i,j,k1,l,ll,l1,nk1
-      real arg,sp,tb,te
+      double precision arg,sp,tb,te   ! DP: upgraded from REAL
 c  ..local array..
-      real h(6)
+      double precision h(6)   ! DP: upgraded from REAL
 c  ..
 c  before starting computations a data check is made. if the input data
 c  are invalid control is immediately repassed to the calling program.
@@ -76,6 +86,7 @@ c  fetch a new x-value arg.
         if(arg.lt.tb) arg = tb
         if(arg.gt.te) arg = te
 c  search for knot interval t(l) <= arg < t(l+1)
+c  patch_02: sequential search below REQUIRES non-decreasing x (see header)
   40    if(arg.lt.t(l1) .or. l.eq.nk1) go to 50
         l = l1
         l1 = l+1
@@ -83,7 +94,7 @@ c  search for knot interval t(l) <= arg < t(l+1)
 c  evaluate the non-zero b-splines at arg.
   50    call fpbspl(t,n,k,arg,l,h)
 c  find the value of s(x) at x=arg.
-        sp = 0.
+        sp = 0.D0
         ll = l-k1
         do 60 j=1,k1
           ll = ll+1
@@ -93,3 +104,4 @@ c  find the value of s(x) at x=arg.
   80  continue
  100  return
       end
+

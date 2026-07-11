@@ -2,10 +2,11 @@
      * b,const,z,zz,u,q,info,up,left,right,jbind,ibind,ier)
 c  ..
 c  ..scalar arguments..
-      real sq
+      double precision sq   ! DP: upgraded from REAL
       integer m,n,maxtr,maxbin,nm,mb,ier
 c  ..array arguments..
-      real x(m),y(m),w(m),t(n),e(n),c(n),sx(m),a(n,4),b(nm,maxbin),
+      double precision x(m),y(m),w(m),t(n),e(n),c(n),sx(m),a(n,4),b(nm,
+     * maxbin),! DP: upgraded from REAL
      * const(n),z(n),zz(n),u(maxbin),q(m,4)
       integer info(maxtr),up(maxtr),left(maxtr),right(maxtr),jbind(mb),
      * ibind(mb)
@@ -13,9 +14,9 @@ c  ..array arguments..
 c  ..local scalars..
       integer count,i,i1,j,j1,j2,j3,k,kdim,k1,k2,k3,k4,k5,k6,
      * l,lp1,l1,l2,l3,merk,nbind,number,n1,n4,n6
-      real f,wi,xi
+      double precision f,wi,xi   ! DP: upgraded from REAL
 c  ..local array..
-      real h(4)
+      double precision h(4)   ! DP: upgraded from REAL
 c  ..subroutine references..
 c    fpbspl,fpadno,fpdeno,fpfrno,fpseno
 c  ..
@@ -56,9 +57,9 @@ c  bandwidth 7. the matrices n'n and n'y are built up in a and z.
       n4 = n-4
 c  initialization
       do 20 i=1,n4
-        z(i) = 0.
+        z(i) = 0.D0
         do 20 j=1,4
-          a(i,j) = 0.
+          a(i,j) = 0.D0
   20  continue
       l = 4
       lp1 = l+1
@@ -154,7 +155,7 @@ c  initialization
       kdim = n4+nbind
       do 170 i=1,nbind
         do 170 j=1,kdim
-          b(j,i) = 0.
+          b(j,i) = 0.D0
  170  continue
 c  matrix b is built up,expressing that the constraints nrs ibind(1),...
 c  ibind(nbind) must be satisfied in equality form.
@@ -190,7 +191,7 @@ c  part of the array b (rows n-3,n-2,...n-4+nbind).
       do 270 i=1,nbind
         i1 = i-1
         do 260 j=i,nbind
-          f = 0.
+          f = 0.D0
           do 230 k=1,n4
             f = f+b(k,i)*b(k,j)*a(k,4)
  230      continue
@@ -219,7 +220,7 @@ c  from (4) and (5) we know that this is equivalent to
 c        (11)  (c1) = (z1)
 c        (12)  (r2)'(d2)(u1) = -(b1)'(z2)
       do 310 i=1,nbind
-        f = 0.
+        f = 0.D0
         do 280 j=1,n4
           f = f+b(j,i)*zz(j)
  280    continue
@@ -339,7 +340,7 @@ c  test whether the feasible solution is optimal.
  490  continue
 c  evaluate s(x) at the data points x(i) and calculate the weighted
 c  sum of squared residual right hand sides sq.
- 500  sq = 0.
+ 500  sq = 0.D0
       l = 4
       lp1 = 5
       do 530 i=1,m
@@ -359,3 +360,4 @@ c  error codes and messages.
  570  ier = 3
  600  return
       end
+

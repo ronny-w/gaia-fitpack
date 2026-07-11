@@ -1,4 +1,10 @@
-      real function evapol(tu,nu,tv,nv,c,rad,x,y)
+      double precision function evapol(tu,nu,tv,nv,c,rad,x,y)   ! DP: upgraded from REAL
+c  ======================================================================
+c  WARNING (fork doc, patch_06 — known limitation):
+c  evapol is hardcoded for bicubic (degree 3) evaluation via wrk(8) and
+c  iwrk(2). it cannot evaluate splines of other degrees without
+c  modification.
+c  ======================================================================
 c  function program evacir evaluates the function f(x,y) = s(u,v),
 c  defined through the transformation
 c      x = u*rad(v)*cos(v)    y = u*rad(v)*sin(v)
@@ -49,24 +55,24 @@ c  latest update : march 1989
 c
 c  ..scalar arguments..
       integer nu,nv
-      real x,y
+      double precision x,y   ! DP: upgraded from REAL
 c  ..array arguments..
-      real tu(nu),tv(nv),c((nu-4)*(nv-4))
+      double precision tu(nu),tv(nv),c((nu-4)*(nv-4))   ! DP: upgraded from REAL
 c  ..user specified function
-      real rad
+      double precision rad   ! DP: upgraded from REAL
 c  ..local scalars..
       integer ier
-      real u,v,r,f,one,dist
+      double precision u,v,r,f,one,dist   ! DP: upgraded from REAL
 c  ..local arrays
-      real wrk(8)
+      double precision wrk(8)   ! DP: upgraded from REAL
       integer iwrk(2)
 c  ..function references
-      real atan2,sqrt
+      double precision atan2,sqrt   ! DP: upgraded from REAL
 c  ..
 c  calculate the (u,v)-coordinates of the given point.
       one = 1
-      u = 0.
-      v = 0.
+      u = 0.D0
+      v = 0.D0
       dist = x**2+y**2
       if(dist.le.0.) go to 10
       v = atan2(y,x)
@@ -79,4 +85,5 @@ c  evaluate s(u,v)
       evapol = f
       return
       end
+
 

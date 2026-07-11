@@ -39,18 +39,19 @@ c ..
 c ..scalar arguments..
       integer n,mest,m,ier
 c  ..array arguments..
-      real t(n),c(n),zero(mest)
+      double precision t(n),c(n),zero(mest)   ! DP: upgraded from REAL
 c  ..local scalars..
       integer i,j,j1,l,n4
-      real ah,a0,a1,a2,a3,bh,b0,b1,c1,c2,c3,c4,c5,d4,d5,h1,h2,
+      double precision ah,a0,a1,a2,a3,bh,b0,b1,c1,c2,c3,c4,c5,d4,d5,h1,
+     * h2,! DP: upgraded from REAL
      * three,two,t1,t2,t3,t4,t5,zz
       logical z0,z1,z2,z3,z4,nz0,nz1,nz2,nz3,nz4
 c  ..local array..
-      real y(3)
+      double precision y(3)   ! DP: upgraded from REAL
 c  ..
 c  set some constants
-      two = 0.2e+01
-      three = 0.3e+01
+      two = 0.2D+01
+      three = 0.3D+01
 c  before starting computations a data check is made. if the input data
 c  are invalid, control is immediately repassed to the calling program.
       n4 = n-4
@@ -136,7 +137,7 @@ c  t(l) <= x <= t(l+1).
         if(a2.lt.0.) z2 = .false.
         nz2 = .not.z2
         z4 = .true.
-        if(3.0*a3+a2.lt.0.) z4 = .false.
+        if(3.0D0*a3+a2.lt.0.) z4 = .false.
         nz4 = .not.z4
         if(.not.((z0.and.(nz1.and.(z3.or.z2.and.nz4).or.nz2.and.
      * z3.and.z4).or.nz0.and.(z1.and.(nz3.or.nz2.and.z4).or.z2.and.
@@ -181,3 +182,4 @@ c  the zeros of s(x) are arranged in increasing order.
  700  ier = 1
  800  return
       end
+

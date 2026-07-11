@@ -10,10 +10,10 @@ c  ..
 c  ..scalar arguments..
       integer n,k,k1,nest
 c  ..array arguments..
-      real a(nest,k1),b(nest,k),z(n),c(n)
+      double precision a(nest,k1),b(nest,k),z(n),c(n)   ! DP: upgraded from REAL
 c  ..local scalars..
       integer i,i1,j,l,l0,l1,n2
-      real store
+      double precision store   ! DP: upgraded from REAL
 c  ..
       n2 = n-k
       l = n

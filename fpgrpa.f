@@ -3,20 +3,21 @@
      * av,av1,bu,bv,nru,nrv)
 c  ..
 c  ..scalar arguments..
-      real p,fp
+      double precision p,fp   ! DP: upgraded from REAL
       integer ifsu,ifsv,ifbu,ifbv,idim,mu,mv,mz,nu,nv,nc,mm,mvnu
 c  ..array arguments..
-      real u(mu),v(mv),z(mz*idim),tu(nu),tv(nv),c(nc*idim),fpu(nu),
+      double precision u(mu),v(mv),z(mz*idim),tu(nu),tv(nv),c(nc*idim),
+     * fpu(nu),! DP: upgraded from REAL
      * fpv(nv),spu(mu,4),spv(mv,4),right(mm*idim),q(mvnu),au(nu,5),
      * au1(nu,4),av(nv,5),av1(nv,4),bu(nu,5),bv(nv,5)
       integer ipar(2),nru(mu),nrv(mv)
 c  ..local scalars..
-      real arg,fac,term,one,half,value
+      double precision arg,fac,term,one,half,value   ! DP: upgraded from REAL
       integer i,id,ii,it,iz,i1,i2,j,jz,k,k1,k2,l,l1,l2,mvv,k0,muu,
      * ncof,nroldu,nroldv,number,nmd,numu,numu1,numv,numv1,nuu,nvv,
      * nu4,nu7,nu8,nv4,nv7,nv8
 c  ..local arrays..
-      real h(5)
+      double precision h(5)   ! DP: upgraded from REAL
 c  ..subroutine references..
 c    fpback,fpbspl,fpdisc,fpbacp,fptrnp,fptrpe
 c  ..
@@ -54,7 +55,7 @@ c            if(ipar(2).ne.0)
 c
 c  set constants
       one = 1
-      half = 0.5
+      half = 0.5D0
 c  initialization
       nu4 = nu-4
       nu7 = nu-7
@@ -253,12 +254,12 @@ c    fpu(r) = sum''i(sumj=1,mv(res(i,j))) , r=1,2,...,nu-7
 c                  tu(r+3) <= u(i) <= tu(r+4)
 c    fpv(r) = sumi=1,mu(sum''j(res(i,j))) , r=1,2,...,nv-7
 c                  tv(r+3) <= v(j) <= tv(r+4)
- 700  fp = 0.
+ 700  fp = 0.D0
       do 720 i=1,nu
-        fpu(i) = 0.
+        fpu(i) = 0.D0
  720  continue
       do 740 i=1,nv
-        fpv(i) = 0.
+        fpv(i) = 0.D0
  740  continue
       nroldu = 0
 c  main loop for the different grid points.
@@ -274,12 +275,12 @@ c  main loop for the different grid points.
 c  evaluate s(u,v) at the current grid point by making the sum of the
 c  cross products of the non-zero b-splines at (u,v), multiplied with
 c  the appropiate b-spline coefficients.
-          term = 0.
+          term = 0.D0
           k0 = numu*nv4+numv
           jz = iz
           do 800 id=1,idim
           k1 = k0
-          value = 0.
+          value = 0.D0
           do 780 l1=1,4
             k2 = k1
             fac = spu(i1,l1)
@@ -311,3 +312,4 @@ c  adjust the different parameters.
  860  continue
       return
       end
+

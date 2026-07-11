@@ -253,20 +253,20 @@ c  latest update : march 1987
 c
 c  ..
 c  ..scalar arguments..
-      real ub,ue,s,fp
+      double precision ub,ue,s,fp   ! DP: upgraded from REAL
       integer iopt,ipar,idim,m,mx,k,nest,n,nc,lwrk,ier
 c  ..array arguments..
-      real u(m),x(mx),w(m),t(nest),c(nc),wrk(lwrk)
+      double precision u(m),x(mx),w(m),t(nest),c(nc),wrk(lwrk)   ! DP: upgraded from REAL
       integer iwrk(nest)
 c  ..local scalars..
-      real tol,dist
+      double precision tol,dist   ! DP: upgraded from REAL
       integer i,ia,ib,ifp,ig,iq,iz,i1,i2,j,k1,k2,lwest,maxit,nmin,ncc
 c ..function references
-      real sqrt
+      double precision sqrt   ! DP: upgraded from REAL
 c  ..
 c  we set up the parameters tol and maxit
       maxit = 20
-      tol = 0.1e-02
+      tol = 0.1D-02
 c  before starting computations a data check is made. if the input data
 c  are invalid, control is immediately repassed to the calling program.
       ier = 10
@@ -285,9 +285,9 @@ c  are invalid, control is immediately repassed to the calling program.
       if(ipar.ne.0 .or. iopt.gt.0) go to 40
       i1 = 0
       i2 = idim
-      u(1) = 0.
+      u(1) = 0.D0
       do 20 i=2,m
-         dist = 0.
+         dist = 0.D0
          do 10 j=1,idim
             i1 = i1+1
             i2 = i2+1
@@ -299,8 +299,8 @@ c  are invalid, control is immediately repassed to the calling program.
       do 30 i=2,m
          u(i) = u(i)/u(m)
   30  continue
-      ub = 0.
-      ue = 1.
+      ub = 0.D0
+      ue = 1.D0
       u(m) = ue
   40  if(ub.gt.u(1) .or. ue.lt.u(m) .or. w(1).le.0.) go to 90
       do 50 i=2,m
@@ -331,3 +331,4 @@ c we partition the working space and determine the spline curve.
      * iwrk,ier)
   90  return
       end
+

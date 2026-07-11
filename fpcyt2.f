@@ -7,9 +7,9 @@ c  ..
 c  ..scalar arguments..
       integer n,nn
 c  ..array arguments..
-      real a(nn,6),b(n),c(n)
+      double precision a(nn,6),b(n),c(n)   ! DP: upgraded from REAL
 c  ..local scalars..
-      real cc,sum
+      double precision cc,sum   ! DP: upgraded from REAL
       integer i,j,j1,n1
 c  ..
       c(1) = b(1)*a(1,4)
@@ -30,3 +30,4 @@ c  ..
   20  continue
       return
       end
+

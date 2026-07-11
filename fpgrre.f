@@ -3,21 +3,22 @@
      * ax,ay,bx,by,nrx,nry)
 c  ..
 c  ..scalar arguments..
-      real p,fp
+      double precision p,fp   ! DP: upgraded from REAL
       integer ifsx,ifsy,ifbx,ifby,mx,my,mz,kx,ky,nx,ny,nc,mm,mynx,
      * kx1,kx2,ky1,ky2
 c  ..array arguments..
-      real x(mx),y(my),z(mz),tx(nx),ty(ny),c(nc),spx(mx,kx1),spy(my,ky1)
+      double precision x(mx),y(my),z(mz),tx(nx),ty(ny),c(nc),spx(mx,
+     * kx1),spy(my,ky1)! DP: upgraded from REAL
      * ,right(mm),q(mynx),ax(nx,kx2),bx(nx,kx2),ay(ny,ky2),by(ny,ky2),
      * fpx(nx),fpy(ny)
       integer nrx(mx),nry(my)
 c  ..local scalars..
-      real arg,cos,fac,pinv,piv,sin,term,one,half
+      double precision arg,cos,fac,pinv,piv,sin,term,one,half   ! DP: upgraded from REAL
       integer i,ibandx,ibandy,ic,iq,irot,it,iz,i1,i2,i3,j,k,k1,k2,l,
      * l1,l2,ncof,nk1x,nk1y,nrold,nroldx,nroldy,number,numx,numx1,
      * numy,numy1,n1
 c  ..local arrays..
-      real h(7)
+      double precision h(7)   ! DP: upgraded from REAL
 c  ..subroutine references..
 c    fpback,fpbspl,fpgivs,fpdisc,fprota
 c  ..
@@ -43,7 +44,7 @@ c       bx,by  : the (nx-2*kx-1) x (nx-kx-1) and (ny-2*ky-1) x (ny-ky-1)
 c                matrices which contain the discontinuity jumps of the
 c                derivatives of the b-splines in the x- and y-direction.
       one = 1
-      half = 0.5
+      half = 0.5D0
       nk1x = nx-kx1
       nk1y = ny-ky1
       if(p.gt.0.) pinv = one/p
@@ -108,11 +109,11 @@ c  store matrix (rx) into (ax) and g into q.
  120  l = my*nk1x
 c  initialization.
       do 130 i=1,l
-        q(i) = 0.
+        q(i) = 0.D0
  130  continue
       do 140 i=1,nk1x
         do 140 j=1,kx2
-          ax(i,j) = 0.
+          ax(i,j) = 0.D0
  140  continue
       l = 0
       nrold = 0
@@ -130,12 +131,12 @@ c  fetch a new row of matrix (bx).
  160    continue
 c  find the appropriate column of q.
         do 170 j=1,my
-          right(j) = 0.
+          right(j) = 0.D0
  170    continue
         irot = nrold
         go to 210
 c  fetch a new row of matrix (spx).
- 180    h(ibandx) = 0.
+ 180    h(ibandx) = 0.D0
         do 190 j=1,kx1
           h(j) = spx(it,j)
  190    continue
@@ -178,11 +179,11 @@ c  store matrix (ry) into (ay) and h into c.
       ncof = nk1x*nk1y
 c  initialization.
       do 280 i=1,ncof
-        c(i) = 0.
+        c(i) = 0.D0
  280  continue
       do 290 i=1,nk1y
         do 290 j=1,ky2
-          ay(i,j) = 0.
+          ay(i,j) = 0.D0
  290  continue
       nrold = 0
 c  ibandy denotes the bandwidth of the matrices (ay) and (ry).
@@ -199,12 +200,12 @@ c  fetch a new row of matrix (by).
  310    continue
 c  find the appropiate row of g.
         do 320 j=1,nk1x
-          right(j) = 0.
+          right(j) = 0.D0
  320    continue
         irot = nrold
         go to 360
 c  fetch a new row of matrix (spy)
- 330    h(ibandy) = 0.
+ 330    h(ibandy) = 0.D0
         do 340 j=1,ky1
           h(j) = spy(it,j)
  340    continue
@@ -272,12 +273,12 @@ c    fpx(r) = sum''i(sumj=1,my(res(i,j))) , r=1,2,...,nx-2*kx-1
 c                  tx(r+kx) <= x(i) <= tx(r+kx+1)
 c    fpy(r) = sumi=1,mx(sum''j(res(i,j))) , r=1,2,...,ny-2*ky-1
 c                  ty(r+ky) <= y(j) <= ty(r+ky+1)
-      fp = 0.
+      fp = 0.D0
       do 490 i=1,nx
-        fpx(i) = 0.
+        fpx(i) = 0.D0
  490  continue
       do 500 i=1,ny
-        fpy(i) = 0.
+        fpy(i) = 0.D0
  500  continue
       nk1y = ny-ky1
       iz = 0
@@ -294,7 +295,7 @@ c  main loop for the different grid points.
 c  evaluate s(x,y) at the current grid point by making the sum of the
 c  cross products of the non-zero b-splines at (x,y), multiplied with
 c  the appropiate b-spline coefficients.
-          term = 0.
+          term = 0.D0
           k1 = numx*nk1y+numy
           do 520 l1=1,kx1
             k2 = k1
@@ -324,4 +325,5 @@ c  adjust the different parameters.
  550  continue
       return
       end
+
 

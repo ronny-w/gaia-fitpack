@@ -4,16 +4,18 @@
      * index,nummer,wrk,lwrk,ier)
 c  ..
 c  ..scalar arguments..
-      real xb,xe,yb,ye,s,eta,tol,fp,fp0
+      double precision xb,xe,yb,ye,s,eta,tol,fp,fp0   ! DP: upgraded from REAL
       integer iopt,m,kxx,kyy,nxest,nyest,maxit,nmax,km1,km2,ib1,ib3,
      * nc,intest,nrest,nx0,ny0,lwrk,ier
 c  ..array arguments..
-      real x(m),y(m),z(m),w(m),tx(nmax),ty(nmax),c(nc),fpint(intest),
+      double precision x(m),y(m),z(m),w(m),tx(nmax),ty(nmax),c(nc),
+     * fpint(intest),! DP: upgraded from REAL
      * coord(intest),f(nc),ff(nc),a(nc,ib1),q(nc,ib3),bx(nmax,km2),
      * by(nmax,km2),spx(m,km1),spy(m,km1),h(ib3),wrk(lwrk)
       integer index(nrest),nummer(m)
 c  ..local scalars..
-      real acc,arg,cos,dmax,fac1,fac2,fpmax,fpms,f1,f2,f3,hxi,p,pinv,
+      double precision acc,arg,cos,dmax,fac1,fac2,fpmax,fpms,f1,f2,f3,
+     * hxi,p,pinv,! DP: upgraded from REAL
      * piv,p1,p2,p3,sigma,sin,sq,store,wi,x0,x1,y0,y1,zi,eps,
      * rn,one,con1,con9,con4,half,ten
       integer i,iband,iband1,iband3,iband4,ibb,ichang,ich1,ich3,ii,
@@ -21,20 +23,20 @@ c  ..local scalars..
      * la,lf,lh,lwest,lx,ly,l1,l2,n,ncof,nk1x,nk1y,nminx,nminy,nreg,
      * nrint,num,num1,nx,nxe,nxx,ny,nye,nyy,n1,rank
 c  ..local arrays..
-      real hx(6),hy(6)
+      double precision hx(6),hy(6)   ! DP: upgraded from REAL
 c  ..function references..
-      real abs,fprati,sqrt
+      double precision abs,fprati,sqrt   ! DP: upgraded from REAL
       integer min0
 c  ..subroutine references..
 c    fpback,fpbspl,fpgivs,fpdisc,fporde,fprank,fprota
 c  ..
 c  set constants
-      one = 0.1e+01
-      con1 = 0.1e0
-      con9 = 0.9e0
-      con4 = 0.4e-01
-      half = 0.5e0
-      ten = 0.1e+02
+      one = 0.1D+01
+      con1 = 0.1D0
+      con9 = 0.9D0
+      con4 = 0.4D-01
+      half = 0.5D0
+      ten = 0.1D+02
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c part 1: determination of the number of knots and their position.     c
 c ****************************************************************     c
@@ -166,12 +168,12 @@ c  find ncof, the number of b-spline coefficients.
         ncof = nk1x*nk1y
 c  initialize the observation matrix a.
         do 140 i=1,ncof
-          f(i) = 0.
+          f(i) = 0.D0
           do 140 j=1,iband
-            a(i,j) = 0.
+            a(i,j) = 0.D0
  140    continue
 c  initialize the sum of squared residuals.
-        fp = 0.
+        fp = 0.D0
 c  fetch the data points in the new order. main loop for the
 c  different panels.
         do 250 num=1,nreg
@@ -203,7 +205,7 @@ c  store the value of these b-splines in spx and spy respectively.
  170      continue
 c  initialize the new row of observation matrix.
           do 180 i=1,iband
-            h(i) = 0.
+            h(i) = 0.D0
  180      continue
 c  calculate the non-zero elements of the new row by making the cross
 c  products of the non-zero b-splines in x- and y-direction.
@@ -245,7 +247,7 @@ c  find the number of the next data point in the panel.
  250    continue
 c  find dmax, the maximum value for the diagonal elements in the reduced
 c  triangle.
-        dmax = 0.
+        dmax = 0.D0
         do 260 i=1,ncof
           if(a(i,1).le.dmax) go to 260
           dmax = a(i,1)
@@ -298,8 +300,8 @@ c  data points having the coordinate belonging to that knot interval.
 c  calculate also coord which is the same sum, weighted by the position
 c  of the data points considered.
  310    do 320 i=1,nrint
-          fpint(i) = 0.
-          coord(i) = 0.
+          fpint(i) = 0.D0
+          coord(i) = 0.D0
  320    continue
         do 360 num=1,nreg
           num1 = num-1
@@ -310,7 +312,7 @@ c  of the data points considered.
           jrot = lx*nk1y+ly
           in = index(num)
  330      if(in.eq.0) go to 360
-          store = 0.
+          store = 0.D0
           i1 = jrot
           do 350 i=1,kx1
             hxi = spx(in,i)
@@ -332,7 +334,7 @@ c  of the data points considered.
 c  find the interval for which fpint is maximal on the condition that
 c  there still can be added a knot.
  370    l = 0
-        fpmax = 0.
+        fpmax = 0.D0
         l1 = 1
         l2 = nrint
         if(nx.eq.nxe) l1 = nxx+1
@@ -351,7 +353,7 @@ c  test in what direction the new knot is going to be added.
         if(l.gt.nxx) go to 400
 c  addition in the x-direction.
         jxy = l+kx1
-        fpint(l) = 0.
+        fpint(l) = 0.D0
         fac1 = tx(jxy)-arg
         fac2 = arg-tx(jxy-1)
         if(fac1.gt.(ten*fac2) .or. fac2.gt.(ten*fac1)) go to 370
@@ -365,7 +367,7 @@ c  addition in the x-direction.
         go to 420
 c  addition in the y-direction.
  400    jxy = l+ky1-nxx
-        fpint(l) = 0.
+        fpint(l) = 0.D0
         fac1 = ty(jxy)-arg
         fac2 = arg-ty(jxy-1)
         if(fac1.gt.(ten*fac2) .or. fac2.gt.(ten*fac1)) go to 370
@@ -414,11 +416,11 @@ c  evaluate the discontinuity jumps of the ky-th order derivative of
 c  the b-splines at the knots ty(l),l=ky+2,...,ny-ky-1.
       call fpdisc(ty,ny,ky2,by,nmax)
 c  initial value for p.
- 450  p1 = 0.
+ 450  p1 = 0.D0
       f1 = fp0-s
       p3 = -one
       f3 = fpms
-      p = 0.
+      p = 0.D0
       do 460 i=1,ncof
         p = p+a(i,1)
  460  continue
@@ -440,7 +442,7 @@ c  store the triangularized observation matrix into q.
  470      continue
           ibb = iband+1
           do 480 j=ibb,iband4
-            q(i,j) = 0.
+            q(i,j) = 0.D0
  480    continue
         if(nk1y.eq.ky1) go to 560
 c  extend the observation matrix with the rows of a matrix, expressing
@@ -450,14 +452,14 @@ c  that for x=cst. sp(x,y) must be a polynomial in y of degree ky.
           do 550 j=1,nk1x
 c  initialize the new row.
             do 490 l=1,iband
-              h(l) = 0.
+              h(l) = 0.D0
  490        continue
 c  fill in the non-zero elements of the row. jrot records the column
 c  number of the first non-zero element in the row.
             do 500 l=1,ky2
               h(l) = by(ii,l)*pinv
  500        continue
-            zi = 0.
+            zi = 0.D0
             jrot = (j-1)*nk1y+ii
 c  rotate the new row into triangle by givens transformations without
 c  square roots.
@@ -478,7 +480,7 @@ c  apply that givens transformation to the left hand side.
  520          do 530 l=1,i2
                 h(l) = h(l+1)
  530          continue
-              h(i2+1) = 0.
+              h(i2+1) = 0.D0
  540        continue
  550    continue
  560    if(nk1x.eq.kx1) go to 640
@@ -489,7 +491,7 @@ c  that for y=cst. sp(x,y) must be a polynomial in x of degree kx.
           do 630 j=1,nk1y
 c  initialize the new row
             do 570 l=1,iband4
-              h(l) = 0.
+              h(l) = 0.D0
  570        continue
 c  fill in the non-zero elements of the row. jrot records the column
 c  number of the first non-zero element in the row.
@@ -498,7 +500,7 @@ c  number of the first non-zero element in the row.
               h(j1) = bx(ii,l)*pinv
               j1 = j1+nk1y
  580        continue
-            zi = 0.
+            zi = 0.D0
             jrot = (i-kx2)*nk1y+j
 c  rotate the new row into triangle by givens transformations .
             do 620 irot=jrot,ncof
@@ -518,12 +520,12 @@ c  apply that givens transformation to the left hand side.
  600          do 610 l=1,i2
                 h(l) = h(l+1)
  610          continue
-              h(i2+1) = 0.
+              h(i2+1) = 0.D0
  620        continue
  630    continue
 c  find dmax, the maximum value for the diagonal elements in the
 c  reduced triangle.
- 640    dmax = 0.
+ 640    dmax = 0.D0
         do 650 i=1,ncof
           if(q(i,1).le.dmax) go to 650
           dmax = q(i,1)
@@ -549,7 +551,7 @@ c  in case of rank deficiency, find the minimum norm solution.
           q(i,1) = q(i,1)/dmax
  680    continue
 c  compute f(p).
-        fp = 0.
+        fp = 0.D0
         do 720 num = 1,nreg
           num1 = num-1
           lx = num1/nyy
@@ -557,7 +559,7 @@ c  compute f(p).
           jrot = lx*nk1y+ly
           in = index(num)
  690      if(in.eq.0) go to 720
-          store = 0.
+          store = 0.D0
           i1 = jrot
           do 710 i=1,kx1
             hxi = spx(in,i)
@@ -620,7 +622,7 @@ c  error codes and messages.
  810  ier = 1
       go to 830
  815  ier = -1
-      fp = 0.
+      fp = 0.D0
  820  if(ncof.ne.rank) ier = -rank
 c  test whether x and y are in the original order.
  830  if(ichang.lt.0) go to 930
@@ -664,4 +666,5 @@ c  if not, interchange x and y once more.
       ny0 = ny
  940  return
       end
+
 

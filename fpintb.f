@@ -1,4 +1,9 @@
       subroutine fpintb(t,n,bint,nk1,x,y)
+c  ======================================================================
+c  WARNING (fork doc, patch_06 — known limitation):
+c  local arrays of size 6 impose a hard limit k<=5 (spline degree).
+c  to support higher degrees, these fixed-size arrays must be generalized.
+c  ======================================================================
 c  subroutine fpintb calculates integrals of the normalized b-splines
 c  nj,k+1(x) of degree k, defined on the set of knots t(j),j=1,2,...n.
 c  it makes use of the formulae of gaffney for the calculation of
@@ -19,21 +24,21 @@ c    bint : array,length nk1, containing the integrals of the b-splines.
 c  ..
 c  ..scalars arguments..
       integer n,nk1
-      real x,y
+      double precision x,y   ! DP: upgraded from REAL
 c  ..array arguments..
-      real t(n),bint(nk1)
+      double precision t(n),bint(nk1)   ! DP: upgraded from REAL
 c  ..local scalars..
       integer i,ia,ib,it,j,j1,k,k1,l,li,lj,lk,l0,min
-      real a,ak,arg,b,f,one
+      double precision a,ak,arg,b,f,one   ! DP: upgraded from REAL
 c  ..local arrays..
-      real aint(6),h(6),h1(6)
+      double precision aint(6),h(6),h1(6)   ! DP: upgraded from REAL
 c  initialization.
-      one = 0.1e+01
+      one = 0.1D+01
       k1 = n-nk1
       ak = k1
       k = k1-1
       do 10 i=1,nk1
-        bint(i) = 0.
+        bint(i) = 0.D0
   10  continue
 c  the integration limits are arranged in increasing order.
       a = x
@@ -67,14 +72,14 @@ c  search for the knot interval t(l) <= arg < t(l+1).
 c  calculation of aint(j), j=1,2,...,k+1.
 c  initialization.
   50    do 55 j=1,k1
-          aint(j) = 0.
+          aint(j) = 0.D0
   55    continue
         aint(1) = (arg-t(l))/(t(l+1)-t(l))
         h1(1) = one
         do 70 j=1,k
 c  evaluation of the non-zero b-splines of degree j at arg,i.e.
 c    h(i+1) = nl-j+i,j(arg), i=0,1,...,j.
-          h(1) = 0.
+          h(1) = 0.D0
           do 60 i=1,j
             li = l+i
             lj = li-j
@@ -125,3 +130,4 @@ c  the order of the integration limits is taken into account.
  150  continue
  160  return
       end
+

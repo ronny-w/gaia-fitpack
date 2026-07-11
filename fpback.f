@@ -6,9 +6,9 @@ c  ..
 c  ..scalar arguments..
       integer n,k,nest
 c  ..array arguments..
-      real a(nest,k),z(n),c(n)
+      double precision a(nest,k),z(n),c(n)   ! DP: upgraded from REAL
 c  ..local scalars..
-      real store
+      double precision store   ! DP: upgraded from REAL
       integer i,i1,j,k1,l,m
 c  ..
       k1 = k-1
@@ -29,3 +29,4 @@ c  ..
   20  continue
   30  return
       end
+

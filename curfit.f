@@ -207,18 +207,24 @@ c  latest update : march 1987
 c
 c  ..
 c  ..scalar arguments..
-      real xb,xe,s,fp
+      double precision xb,xe,s,fp   ! DP: upgraded from REAL
       integer iopt,m,k,nest,n,lwrk,ier
 c  ..array arguments..
-      real x(m),y(m),w(m),t(nest),c(nest),wrk(lwrk)
+      double precision x(m),y(m),w(m),t(nest),c(nest),wrk(lwrk)   ! DP: upgraded from REAL
       integer iwrk(nest)
 c  ..local scalars..
-      real tol
+      double precision tol   ! DP: upgraded from REAL
       integer i,ia,ib,ifp,ig,iq,iz,j,k1,k2,lwest,maxit,nmin
 c  ..
 c  we set up the parameters tol and maxit
       maxit = 20
-      tol = 0.1e-02
+c  patch_04: eps/tol adjusted from single-precision value (0.1D-02) to
+c  1.0D-10 for double precision arithmetic (approx sqrt(DBL_EPSILON)).
+c  note: the user-facing 'eps' argument (rank threshold, 0<eps<1) is a
+c  separate quantity and is intentionally left unchanged for backward
+c  compatibility. 'tol' below is the internal relative convergence
+c  tolerance abs(fp-s)/s <= tol.
+      tol = 1.0D-10
 c  before starting computations a data check is made. if the input data
 c  are invalid, control is immediately repassed to the calling program.
       ier = 10
@@ -258,3 +264,4 @@ c we partition the working space and determine the spline approximation.
      * wrk(ifp),wrk(iz),wrk(ia),wrk(ib),wrk(ig),wrk(iq),iwrk,ier)
   50  return
       end
+

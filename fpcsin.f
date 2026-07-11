@@ -1,23 +1,31 @@
       subroutine fpcsin(a,b,par,sia,coa,sib,cob,ress,resc)
+c  ======================================================================
+c  WARNING (fork doc, patch_06 — known numerical limitation):
+c  for large frequencies alpha, the trigonometric recurrence in fpcsin
+c  may lose accuracy due to cancellation. accuracy degrades when
+c  alpha*(t(n-3)-t(4)) >> 1. no fix is planned; users should validate
+c  results for large alpha.
+c  ======================================================================
 c  fpcsin calculates the integrals ress=integral((b-x)**3*sin(par*x))
 c  and resc=integral((b-x)**3*cos(par*x)) over the interval (a,b),
 c  given sia=sin(par*a),coa=cos(par*a),sib=sin(par*b) and cob=cos(par*b)
 c  ..
 c  ..scalar arguments..
-      real a,b,par,sia,coa,sib,cob,ress,resc
+      double precision a,b,par,sia,coa,sib,cob,ress,resc   ! DP: upgraded from REAL
 c  ..local scalars..
       integer i,j
-      real ab,ab4,ai,alfa,beta,b2,b4,eps,fac,f1,f2,one,quart,six,
+      double precision ab,ab4,ai,alfa,beta,b2,b4,eps,fac,f1,f2,one,
+     * quart,six,! DP: upgraded from REAL
      * three,two
 c  ..function references..
-      real abs
+      double precision abs   ! DP: upgraded from REAL
 c  ..
-      one = 0.1e+01
-      two = 0.2e+01
-      three = 0.3e+01
-      six = 0.6e+01
-      quart = 0.25e+0
-      eps = 0.1e-09
+      one = 0.1D+01
+      two = 0.2D+01
+      three = 0.3D+01
+      six = 0.6D+01
+      quart = 0.25D+0
+      eps = 0.1D-09
       ab = b-a
       ab4 = ab**4
       alfa = ab*par
@@ -36,7 +44,7 @@ c integration by parts.
 c ress and resc are found by evaluating a series expansion.
  100  fac = quart
       f1 = fac
-      f2 = 0.
+      f2 = 0.D0
       i = 4
       do 200 j=1,5
         i = i+1
@@ -54,3 +62,4 @@ c ress and resc are found by evaluating a series expansion.
       resc = ab4*(coa*f1-sia*f2)
  400  return
       end
+

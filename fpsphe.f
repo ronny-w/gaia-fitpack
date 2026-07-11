@@ -5,15 +5,17 @@ c  ..
 c  ..scalar arguments..
       integer iopt,m,ntest,npest,maxit,ib1,ib3,nc,ncc,intest,nrest,
      * nt,np,lwrk,ier
-      real s,eta,tol,fp,sup
+      double precision s,eta,tol,fp,sup   ! DP: upgraded from REAL
 c  ..array arguments..
-      real teta(m),phi(m),r(m),w(m),tt(ntest),tp(npest),c(nc),
+      double precision teta(m),phi(m),r(m),w(m),tt(ntest),tp(npest),
+     * c(nc),! DP: upgraded from REAL
      * fpint(intest),coord(intest),f(ncc),ff(nc),row(npest),coco(npest),
      * cosi(npest),a(ncc,ib1),q(ncc,ib3),bt(ntest,5),bp(npest,5),
      * spt(m,4),spp(m,4),h(ib3),wrk(lwrk)
       integer index(nrest),nummer(m)
 c  ..local scalars..
-      real aa,acc,arg,cn,co,c1,dmax,d1,d2,eps,facc,facs,fac1,fac2,fn,
+      double precision aa,acc,arg,cn,co,c1,dmax,d1,d2,eps,facc,facs,
+     * fac1,fac2,fn,! DP: upgraded from REAL
      * fpmax,fpms,f1,f2,f3,hti,htj,p,pi,pinv,piv,pi2,p1,p2,p3,ri,si,
      * sigma,sq,store,wi,rn,one,con1,con9,con4,half,ten
       integer i,iband,iband1,iband3,iband4,ich1,ich3,ii,ij,il,in,irot,
@@ -21,20 +23,20 @@ c  ..local scalars..
      * l3,l4,ncof,ncoff,npp,np4,nreg,nrint,nrr,nr1,ntt,nt4,nt6,num,
      * num1,rank
 c  ..local arrays..
-      real ht(4),hp(4)
+      double precision ht(4),hp(4)   ! DP: upgraded from REAL
 c  ..function references..
-      real abs,atan,fprati,sqrt,cos,sin
+      double precision abs,atan,fprati,sqrt,cos,sin   ! DP: upgraded from REAL
       integer min0
 c  ..subroutine references..
 c   fpback,fpbspl,fpgivs,fpdisc,fporde,fprank,fprota,fprpsp
 c  ..
 c  set constants
-      one = 0.1e+01
-      con1 = 0.1e0
-      con9 = 0.9e0
-      con4 = 0.4e-01
-      half = 0.5e0
-      ten = 0.1e+02
+      one = 0.1D+01
+      con1 = 0.1D0
+      con9 = 0.9D0
+      con4 = 0.4D-01
+      half = 0.5D0
+      ten = 0.1D+02
       pi = atan(one)*4
       pi2 = pi+pi
       eps = sqrt(eta)
@@ -50,14 +52,14 @@ c  where f1(teta) and fn(teta) are the cubic polynomials satisfying
 c     f1(0) = 1, f1(pi) = f1'(0) = f1'(pi) = 0 ; fn(teta) = 1-f1(teta).
 c  the corresponding weighted sum of squared residuals gives the upper
 c  bound sup for the smoothing factor s.
-  10  sup = 0.
-      d1 = 0.
-      d2 = 0.
-      c1 = 0.
-      cn = 0.
+  10  sup = 0.D0
+      d1 = 0.D0
+      d2 = 0.D0
+      c1 = 0.D0
+      cn = 0.D0
       fac1 = pi*(one + half)
       fac2 = (one + one)/pi**3
-      aa = 0.
+      aa = 0.D0
       do 40 i=1,m
          wi = w(i)
          ri = r(i)*wi
@@ -84,9 +86,9 @@ c  find the b-spline representation of this least-squares polynomial
          c(i+4) = c1
          c(i+8) = cn
          c(i+12) = cn
-         tt(i) = 0.
+         tt(i) = 0.D0
          tt(i+4) = pi
-         tp(i) = 0.
+         tp(i) = 0.D0
          tp(i+4) = pi2
   50  continue
       fp = sup
@@ -125,7 +127,7 @@ c  b-spline representation of s(teta,phi).
          l2 = l1
          l3 = np-3
          l4 = l3
-         tp(l2) = 0.
+         tp(l2) = 0.D0
          tp(l3) = pi2
          do 80 i=1,3
             l1 = l1+1
@@ -137,7 +139,7 @@ c  b-spline representation of s(teta,phi).
   80     continue
         l = nt
         do 90 i=1,4
-          tt(i) = 0.
+          tt(i) = 0.D0
           tt(l) = pi
           l = l-1
   90    continue
@@ -155,10 +157,10 @@ c  arrange the data points according to the panel they belong to.
 c  find the b-spline coefficients coco and cosi of the cubic spline
 c  approximations sc(phi) and ss(phi) for cos(phi) and sin(phi).
         do 100 i=1,npp
-           coco(i) = 0.
-           cosi(i) = 0.
+           coco(i) = 0.D0
+           cosi(i) = 0.D0
            do 100 j=1,npp
-              a(i,j) = 0.
+              a(i,j) = 0.D0
  100    continue
 c  the coefficients coco and cosi are obtained from the conditions
 c  sc(tp(i))=cos(tp(i)),resp. ss(tp(i))=sin(tp(i)),i=4,5,...np-4.
@@ -167,7 +169,7 @@ c  sc(tp(i))=cos(tp(i)),resp. ss(tp(i))=sin(tp(i)),i=4,5,...np-4.
            arg = tp(l2)
            call fpbspl(tp,np,3,arg,l2,hp)
            do 110 j=1,npp
-              row(j) = 0.
+              row(j) = 0.D0
  110       continue
            ll = i
            do 120 j=1,3
@@ -207,12 +209,12 @@ c  find the bandwidth of the observation matrix a.
         iband1 = iband-1
 c  initialize the observation matrix a.
         do 160 i=1,ncof
-          f(i) = 0.
+          f(i) = 0.D0
           do 160 j=1,iband
-            a(i,j) = 0.
+            a(i,j) = 0.D0
  160    continue
 c  initialize the sum of squared residuals.
-        fp = 0.
+        fp = 0.D0
 c  fetch the data points in the new order. main loop for the
 c  different panels.
         do 340 num=1,nreg
@@ -244,13 +246,13 @@ c  store the value of these b-splines in spt and spp resp.
  180      continue
 c  initialize the new row of observation matrix.
           do 190 i=1,iband
-            h(i) = 0.
+            h(i) = 0.D0
  190      continue
 c  calculate the non-zero elements of the new row by making the cross
 c  products of the non-zero b-splines in teta- and phi-direction and
 c  by taking into account the conditions of the spherical splines.
           do 200 i=1,npp
-             row(i) = 0.
+             row(i) = 0.D0
  200      continue
 c  take into account the condition (3) of the spherical splines.
           ll = lp
@@ -261,8 +263,8 @@ c  take into account the condition (3) of the spherical splines.
  210      continue
 c  take into account the other conditions of the spherical splines.
           if(lt.gt.2 .and. lt.lt.(ntt-1)) go to 230
-          facc = 0.
-          facs = 0.
+          facc = 0.D0
+          facs = 0.D0
           do 220 i=1,npp
              facc = facc+row(i)*coco(i)
              facs = facs+row(i)*cosi(i)
@@ -324,7 +326,7 @@ c  find the number of the next data point in the panel.
  340    continue
 c  find dmax, the maximum value for the diagonal elements in the reduced
 c  triangle.
-        dmax = 0.
+        dmax = 0.D0
         do 350 i=1,ncof
           if(a(i,1).le.dmax) go to 350
           dmax = a(i,1)
@@ -377,8 +379,8 @@ c  data points having the coordinate belonging to that knot interval.
 c  calculate also coord which is the same sum, weighted by the position
 c  of the data points considered.
  440    do 450 i=1,nrint
-          fpint(i) = 0.
-          coord(i) = 0.
+          fpint(i) = 0.D0
+          coord(i) = 0.D0
  450    continue
         do 490 num=1,nreg
           num1 = num-1
@@ -389,7 +391,7 @@ c  of the data points considered.
           jrot = lt*np4+lp
           in = index(num)
  460      if(in.eq.0) go to 490
-          store = 0.
+          store = 0.D0
           i1 = jrot
           do 480 i=1,4
             hti = spt(in,i)
@@ -416,7 +418,7 @@ c  there still can be added a knot.
         if(npest.lt.np+2) l2=ntt
 c  test whether we cannot further increase the number of knots.
         if(l1.gt.l2) go to 950
- 500    fpmax = 0.
+ 500    fpmax = 0.D0
         l = 0
         do 510 i=l1,l2
           if(fpmax.ge.fpint(i)) go to 510
@@ -430,7 +432,7 @@ c  test in what direction the new knot is going to be added.
         if(l.gt.ntt) go to 530
 c  addition in the teta-direction
         l4 = l+4
-        fpint(l) = 0.
+        fpint(l) = 0.D0
         fac1 = tt(l4)-arg
         fac2 = arg-tt(l4-1)
         if(fac1.gt.(ten*fac2) .or. fac2.gt.(ten*fac1)) go to 500
@@ -447,7 +449,7 @@ c  addition in the phi-direction
         if(arg.lt.pi) go to 540
         arg = arg-pi
         l4 = l4-nrr
- 540    fpint(l) = 0.
+ 540    fpint(l) = 0.D0
         fac1 = tp(l4)-arg
         fac2 = arg-tp(l4-1)
         if(fac1.gt.(ten*fac2) .or. fac2.gt.(ten*fac1)) go to 500
@@ -493,11 +495,11 @@ c  evaluate the discontinuity jumps of the 3-th order derivative of
 c  the b-splines at the knots tp(l),l=5,...,np-4.
       call fpdisc(tp,np,5,bp,npest)
 c  initial value for p.
-      p1 = 0.
+      p1 = 0.D0
       f1 = sup-s
       p3 = -one
       f3 = fpms
-      p = 0.
+      p = 0.D0
       do 585 i=1,ncof
         p = p+a(i,1)
  585  continue
@@ -516,7 +518,7 @@ c  store the triangularized observation matrix into q.
         do 600 i=1,ncof
           ff(i) = f(i)
           do 590 j=1,iband4
-            q(i,j) = 0.
+            q(i,j) = 0.D0
  590      continue
           do 600 j=1,iband
             q(i,j) = a(i,j)
@@ -527,7 +529,7 @@ c  that for teta=cst. sp(teta,phi) must be a constant function.
         do 720 i=5,np4
           ii = i-4
           do 610 l=1,npp
-             row(l) = 0.
+             row(l) = 0.D0
  610      continue
           ll = ii
           do 620  l=1,5
@@ -535,8 +537,8 @@ c  that for teta=cst. sp(teta,phi) must be a constant function.
              row(ll) = row(ll)+bp(ii,l)
              ll = ll+1
  620      continue
-          facc = 0.
-          facs = 0.
+          facc = 0.D0
+          facs = 0.D0
           do 630 l=1,npp
              facc = facc+row(l)*coco(l)
              facs = facs+row(l)*cosi(l)
@@ -544,7 +546,7 @@ c  that for teta=cst. sp(teta,phi) must be a constant function.
           do 720 j=1,nt6
 c  initialize the new row.
             do 640 l=1,iband
-              h(l) = 0.
+              h(l) = 0.D0
  640        continue
 c  fill in the non-zero elements of the row. jrot records the column
 c  number of the first non-zero element in the row.
@@ -560,7 +562,7 @@ c  number of the first non-zero element in the row.
  670        do 675 l=1,iband
                h(l) = h(l)*pinv
  675        continue
-            ri = 0.
+            ri = 0.D0
 c  rotate the new row into triangle by givens transformations.
             do 710 irot=jrot,ncof
               piv = h(1)
@@ -579,7 +581,7 @@ c  apply that givens transformation to the left hand side.
  690          do 700 l=1,i2
                 h(l) = h(l+1)
  700          continue
-              h(i2+1) = 0.
+              h(i2+1) = 0.D0
  710        continue
  720    continue
 c  extend the observation matrix with the rows of a matrix expressing
@@ -589,7 +591,7 @@ c  that for phi=cst. sp(teta,phi) must be a cubic polynomial.
           do 810 j=1,npp
 c  initialize the new row
             do 730 l=1,iband4
-              h(l) = 0.
+              h(l) = 0.D0
  730        continue
 c  fill in the non-zero elements of the row. jrot records the column
 c  number of the first non-zero element in the row.
@@ -613,7 +615,7 @@ c  number of the first non-zero element in the row.
             do 765 l=1,iband4
                h(l) = h(l)*pinv
  765        continue
-            ri = 0.
+            ri = 0.D0
             jrot = 1
             if(ii.gt.2) jrot = 3+j+(ii-3)*npp
 c  rotate the new row into triangle by givens transformations.
@@ -634,12 +636,12 @@ c  apply that givens transformation to the left hand side.
  780          do 790 l=1,i2
                 h(l) = h(l+1)
  790          continue
-              h(i2+1) = 0.
+              h(i2+1) = 0.D0
  800        continue
  810    continue
 c  find dmax, the maximum value for the diagonal elements in the
 c  reduced triangle.
-        dmax = 0.
+        dmax = 0.D0
         do 820 i=1,ncof
           if(q(i,1).le.dmax) go to 820
           dmax = q(i,1)
@@ -668,7 +670,7 @@ c  find the coefficients in the standard b-spline representation of
 c  the spherical spline.
         call fprpsp(nt,np,coco,cosi,c,ff,ncoff)
 c  compute f(p).
-        fp = 0.
+        fp = 0.D0
         do 890 num = 1,nreg
           num1 = num-1
           lt = num1/npp
@@ -676,7 +678,7 @@ c  compute f(p).
           jrot = lt*np4+lp
           in = index(num)
  860      if(in.eq.0) go to 890
-          store = 0.
+          store = 0.D0
           i1 = jrot
           do 880 i=1,4
             hti = spt(in,i)
@@ -741,7 +743,7 @@ c  error codes and messages.
  960  ier = -2
       go to 990
  970  ier = -1
-      fp = 0.
+      fp = 0.D0
  980  if(ncof.ne.rank) ier = -rank
  990  return
       end

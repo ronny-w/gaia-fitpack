@@ -4,12 +4,12 @@ c  derivative of the b-splines of degree k at the knots t(k+2)..t(n-k-1)
 c  ..scalar arguments..
       integer n,k2,nest
 c  ..array arguments..
-      real t(n),b(nest,k2)
+      double precision t(n),b(nest,k2)   ! DP: upgraded from REAL
 c  ..local scalars..
-      real an,fac,prod
+      double precision an,fac,prod   ! DP: upgraded from REAL
       integer i,ik,j,jk,k,k1,l,lj,lk,lmk,lp,nk1,nrint
 c  ..local array..
-      real h(12)
+      double precision h(12)   ! DP: upgraded from REAL
 c  ..
       k1 = k2-1
       k = k1-1
@@ -41,3 +41,4 @@ c  ..
   40  continue
       return
       end
+

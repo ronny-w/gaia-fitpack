@@ -2,31 +2,32 @@
      * k1,k2,n,t,nc,c,fp,fpint,z,a,b,g,q,nrdata,ier)
 c  ..
 c  ..scalar arguments..
-      real ub,ue,s,tol,fp
+      double precision ub,ue,s,tol,fp   ! DP: upgraded from REAL
       integer iopt,idim,m,mx,k,nest,maxit,k1,k2,n,nc,ier
 c  ..array arguments..
-      real u(m),x(mx),w(m),t(nest),c(nc),fpint(nest),
+      double precision u(m),x(mx),w(m),t(nest),c(nc),fpint(nest),   ! DP: upgraded from REAL
      * z(nc),a(nest,k1),b(nest,k2),g(nest,k2),q(m,k1)
       integer nrdata(nest)
 c  ..local scalars..
-      real acc,con1,con4,con9,cos,fac,fpart,fpms,fpold,fp0,f1,f2,f3,
+      double precision acc,con1,con4,con9,cos,fac,fpart,fpms,fpold,fp0,
+     * f1,f2,f3,! DP: upgraded from REAL
      * half,one,p,pinv,piv,p1,p2,p3,rn,sin,store,term,ui,wi
       integer i,ich1,ich3,it,iter,i1,i2,i3,j,jj,j1,j2,k3,l,l0,
      * mk1,new,nk1,nmax,nmin,nplus,npl1,nrint,n8
 c  ..local arrays..
-      real h(7),xi(10)
+      double precision h(7),xi(10)   ! DP: upgraded from REAL
 c  ..function references
-      real abs,fprati
+      double precision abs,fprati   ! DP: upgraded from REAL
       integer max0,min0
 c  ..subroutine references..
 c    fpback,fpbspl,fpgivs,fpdisc,fpknot,fprota
 c  ..
 c  set constants
-      one = 0.1e+01
-      con1 = 0.1e0
-      con9 = 0.9e0
-      con4 = 0.4e-01
-      half = 0.5e0
+      one = 0.1D+01
+      con1 = 0.1D0
+      con9 = 0.9D0
+      con4 = 0.4D-01
+      half = 0.5D0
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c  part 1: determination of the number of knots and their position     c
 c  **************************************************************      c
@@ -90,7 +91,7 @@ c  according to the set of knots found at the last call of the routine.
       nplus = nrdata(n)
       if(fp0.gt.s) go to 60
   50  n = nmin
-      fpold = 0.
+      fpold = 0.D0
       nplus = 0
       nrdata(1) = m-2
 c  main loop for the different sets of knots. m is a save upper bound
@@ -112,14 +113,14 @@ c  compute the b-spline coefficients of the least-squares spline curve
 c  sinf(u). the observation matrix a is built up row by row and
 c  reduced to upper triangular form by givens transformations.
 c  at the same time fp=f(p=inf) is computed.
-        fp = 0.
+        fp = 0.D0
 c  initialize the b-spline coefficients and the observation matrix a.
         do 75 i=1,nc
-          z(i) = 0.
+          z(i) = 0.D0
   75    continue
         do 80 i=1,nk1
           do 80 j=1,k1
-            a(i,j) = 0.
+            a(i,j) = 0.D0
   80    continue
         l = k1
         jj = 0
@@ -204,7 +205,7 @@ c  determine the number of knots nplus we are going to add.
  150    fpold = fp
 c  compute the sum of squared residuals for each knot interval
 c  t(j+k) <= u(i) <= t(j+k+1) and store it in fpint(j),j=1,2,...nrint.
-        fpart = 0.
+        fpart = 0.D0
         i = 1
         l = k2
         new = 0
@@ -213,10 +214,10 @@ c  t(j+k) <= u(i) <= t(j+k+1) and store it in fpint(j),j=1,2,...nrint.
           if(u(it).lt.t(l) .or. l.gt.nk1) go to 160
           new = 1
           l = l+1
- 160      term = 0.
+ 160      term = 0.D0
           l0 = l-k2
           do 175 j2=1,idim
-            fac = 0.
+            fac = 0.D0
             j1 = l0
             do 170 j=1,k1
               j1 = j1+1
@@ -273,11 +274,11 @@ c  evaluate the discontinuity jump of the kth derivative of the
 c  b-splines at the knots t(l),l=k+2,...n-k-1 and store in b.
       call fpdisc(t,n,k2,b,nest)
 c  initial value for p.
-      p1 = 0.
+      p1 = 0.D0
       f1 = fp0-s
       p3 = -one
       f3 = fpms
-      p = 0.
+      p = 0.D0
       do 252 i=1,nk1
          p = p+a(i,1)
  252  continue
@@ -295,7 +296,7 @@ c  triangularised observation matrix a which is stored in g.
           c(i) = z(i)
  255    continue
         do 260 i=1,nk1
-          g(i,k2) = 0.
+          g(i,k2) = 0.D0
           do 260 j=1,k1
             g(i,j) = a(i,j)
  260    continue
@@ -305,7 +306,7 @@ c  the row of matrix b is rotated into triangle by givens transformation
             h(i) = b(it,i)*pinv
  270      continue
           do 275 j=1,idim
-            xi(j) = 0.
+            xi(j) = 0.D0
  275      continue
           do 290 j=it,nk1
             piv = h(1)
@@ -326,7 +327,7 @@ c  transformations to left hand side.
               call fprota(cos,sin,h(i1),g(j,i1))
               h(i) = h(i1)
  280        continue
-            h(i2+1) = 0.
+            h(i2+1) = 0.D0
  290      continue
  300    continue
 c  backward substitution to obtain the b-spline coefficients.
@@ -336,16 +337,16 @@ c  backward substitution to obtain the b-spline coefficients.
           j1 =j1+n
  305    continue
 c  computation of f(p).
-        fp = 0.
+        fp = 0.D0
         l = k2
         jj = 0
         do 330 it=1,m
           if(u(it).lt.t(l) .or. l.gt.nk1) go to 310
           l = l+1
  310      l0 = l-k2
-          term = 0.
+          term = 0.D0
           do 325 j2=1,idim
-            fac = 0.
+            fac = 0.D0
             j1 = l0
             do 320 j=1,k1
               j1 = j1+1
@@ -400,3 +401,4 @@ c  error codes and messages.
  430  ier = -1
  440  return
       end
+

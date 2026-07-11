@@ -19,10 +19,10 @@ c  ..
 c  ..scalar arguments..
       integer m,n,k,ib,ie,ier
 c  ..array arguments..
-      real x(m),t(n)
+      double precision x(m),t(n)   ! DP: upgraded from REAL
 c  ..local scalars..
       integer i,ib1,ie1,j,jj,k1,k2,l,nk1,nk2,nk3
-      real tj,tl
+      double precision tj,tl   ! DP: upgraded from REAL
 c  ..
       k1 = k+1
       k2 = k1+1
@@ -67,3 +67,4 @@ c  check condition no 5
   70  ier = 0
   80  return
       end
+

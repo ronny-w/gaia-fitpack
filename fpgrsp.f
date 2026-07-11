@@ -3,26 +3,28 @@
      * right,q,au,av1,av2,bu,bv,a0,a1,b0,b1,c0,c1,cosi,nru,nrv)
 c  ..
 c  ..scalar arguments..
-      real p,sq,fp
+      double precision p,sq,fp   ! DP: upgraded from REAL
       integer ifsu,ifsv,ifbu,ifbv,iback,mu,mv,mr,iop0,iop1,nu,nv,nc,
      * mm,mvnu
 c  ..array arguments..
-      real u(mu),v(mv),r(mr),dr(6),tu(nu),tv(nv),c(nc),fpu(nu),fpv(nv),
+      double precision u(mu),v(mv),r(mr),dr(6),tu(nu),tv(nv),c(nc),
+     * fpu(nu),fpv(nv),! DP: upgraded from REAL
      * spu(mu,4),spv(mv,4),right(mm),q(mvnu),au(nu,5),av1(nv,6),c0(nv),
      * av2(nv,4),a0(2,mv),b0(2,nv),cosi(2,nv),bu(nu,5),bv(nv,5),c1(nv),
      * a1(2,mv),b1(2,nv)
       integer nru(mu),nrv(mv)
 c  ..local scalars..
-      real arg,co,dr01,dr02,dr03,dr11,dr12,dr13,fac,fac0,fac1,pinv,piv,
+      double precision arg,co,dr01,dr02,dr03,dr11,dr12,dr13,fac,fac0,
+     * fac1,pinv,piv,! DP: upgraded from REAL
      * si,term,one,three,half
       integer i,ic,ii,ij,ik,iq,irot,it,ir,i0,i1,i2,i3,j,jj,jk,jper,
      * j0,j1,k,k1,k2,l,l0,l1,l2,mvv,ncof,nrold,nroldu,nroldv,number,
      * numu,numu1,numv,numv1,nuu,nu4,nu7,nu8,nu9,nv11,nv4,nv7,nv8,n1
 c  ..local arrays..
-      real h(5),h1(5),h2(4)
+      double precision h(5),h1(5),h2(4)   ! DP: upgraded from REAL
 c  ..function references..
       integer min0
-      real cos,sin
+      double precision cos,sin   ! DP: upgraded from REAL
 c  ..subroutine references..
 c    fpback,fpbspl,fpgivs,fpcyt1,fpcyt2,fpdisc,fpbacp,fprota
 c  ..
@@ -67,7 +69,7 @@ c
 c  set constants
       one = 1
       three = 3
-      half = 0.5
+      half = 0.5D0
 c  initialization
       nu4 = nu-4
       nu7 = nu-7
@@ -128,8 +130,8 @@ c  problem in the v-direction.
 c  calculate the coefficients of the interpolating splines for cos(v)
 c  and sin(v).
       do 55 i=1,nv4
-         cosi(1,i) = 0.
-         cosi(2,i) = 0.
+         cosi(1,i) = 0.D0
+         cosi(2,i) = 0.D0
   55  continue
       if(nv7.lt.4) go to 85
       do 65 i=1,nv7
@@ -179,8 +181,8 @@ c  simultaneously, we compute the resulting sum of squared residuals sq.
  155  continue
       if(nv8.eq.0 .or. p.le.0.) go to 165
       do 160 i=1,nv8
-         b0(1,i) = 0.
-         b1(1,i) = 0.
+         b0(1,i) = 0.D0
+         b1(1,i) = 0.D0
  160  continue
  165  mvv = mv
       if(iop0.eq.0) go to 195
@@ -192,7 +194,7 @@ c  simultaneously, we compute the resulting sum of squared residuals sq.
  170  continue
       do 180 i=1,mv
          number = nrv(i)
-         fac = 0.
+         fac = 0.D0
          do 175 j=1,4
             number = number+1
             fac = fac+c0(number)*spv(i,j)
@@ -202,7 +204,7 @@ c  simultaneously, we compute the resulting sum of squared residuals sq.
       if(nv8.eq.0 .or. p.le.0.) go to 195
       do 190 i=1,nv8
          number = i
-         fac = 0.
+         fac = 0.D0
          do 185 j=1,5
             fac = fac+c0(number)*bv(i,j)
             number = number+1
@@ -219,7 +221,7 @@ c  simultaneously, we compute the resulting sum of squared residuals sq.
  200  continue
       do 210 i=1,mv
          number = nrv(i)
-         fac = 0.
+         fac = 0.D0
          do 205 j=1,4
             number = number+1
             fac = fac+c1(number)*spv(i,j)
@@ -229,7 +231,7 @@ c  simultaneously, we compute the resulting sum of squared residuals sq.
       if(nv8.eq.0 .or. p.le.0.) go to 225
       do 220 i=1,nv8
          number = i
-         fac = 0.
+         fac = 0.D0
          do 215 j=1,5
             fac = fac+c1(number)*bv(i,j)
             number = number+1
@@ -244,14 +246,14 @@ c  the rows of matrix qq to obtain the mv x nuu matrix g.
 c  we store matrix (ru) into au and g into q.
  225  l = mvv*nuu
 c  initialization.
-      sq = 0.
+      sq = 0.D0
       if(l.eq.0) go to 245
       do 230 i=1,l
-        q(i) = 0.
+        q(i) = 0.D0
  230  continue
       do 240 i=1,nuu
         do 240 j=1,5
-          au(i,j) = 0.
+          au(i,j) = 0.D0
  240  continue
       l = 0
  245  nrold = 0
@@ -260,7 +262,7 @@ c  initialization.
         number = nru(it)
 c  find the appropriate column of q.
  250    do 260 j=1,mvv
-           right(j) = 0.
+           right(j) = 0.D0
  260    continue
         if(nrold.eq.number) go to 280
         if(p.le.0.) go to 410
@@ -363,13 +365,13 @@ c  triangular matrix of bandwidth 5.
       ncof = nuu*nv7
 c  initialization.
       do 430 i=1,ncof
-        c(i) = 0.
+        c(i) = 0.D0
  430  continue
       do 440 i=1,nv4
-        av1(i,5) = 0.
+        av1(i,5) = 0.D0
         do 440 j=1,4
-          av1(i,j) = 0.
-          av2(i,j) = 0.
+          av1(i,j) = 0.D0
+          av2(i,j) = 0.D0
  440  continue
       jper = 0
       nrold = 0
@@ -384,7 +386,7 @@ c  fetch a new row of matrix (bv).
  460    continue
 c  find the appropiate row of g.
         do 465 j=1,nuu
-          right(j) = 0.
+          right(j) = 0.D0
  465    continue
         if(mv.eq.mvv) go to 510
         l = mv+n1
@@ -394,7 +396,7 @@ c  find the appropiate row of g.
  470    continue
         go to 510
 c  fetch a new row of matrix (spv)
- 480    h(5) = 0.
+ 480    h(5) = 0.D0
         do 490 j=1,4
           h(j) = spv(it,j)
  490    continue
@@ -425,10 +427,10 @@ c  the b-splines n(j;v),j=nv7+1,...,nv4, we take account of condition
 c  (2) for setting up this row of (avv). the row is stored in h1( the
 c  part with respect to av1) and h2 (the part with respect to av2).
  550     do 560 i=1,4
-            h1(i) = 0.
-            h2(i) = 0.
+            h1(i) = 0.D0
+            h2(i) = 0.D0
  560     continue
-         h1(5) = 0.
+         h1(5) = 0.D0
          j = nrold-nv11
          do 600 i=1,5
             j = j+1
@@ -470,7 +472,7 @@ c  apply that transformation to the rows of (avv) with respect to av1.
  640        do 650 i=1,i2
                h1(i) = h1(i+1)
  650        continue
-            h1(i2+1) = 0.
+            h1(i2+1) = 0.D0
  660     continue
 c  rotations with the rows nv11+1,...,nv7 of avv.
  670     do 700 j=1,4
@@ -601,12 +603,12 @@ c    fpu(r) = sum''i(sumj=1,mv(res(i,j))) , r=1,2,...,nu-7
 c                  tu(r+3) <= u(i) <= tu(r+4)
 c    fpv(r) = sumi=1,mu(sum''j(res(i,j))) , r=1,2,...,nv-7
 c                  tv(r+3) <= v(j) <= tv(r+4)
-      fp = 0.
+      fp = 0.D0
       do 890 i=1,nu
-        fpu(i) = 0.
+        fpu(i) = 0.D0
  890  continue
       do 900 i=1,nv
-        fpv(i) = 0.
+        fpv(i) = 0.D0
  900  continue
       ir = 0
       nroldu = 0
@@ -622,7 +624,7 @@ c  main loop for the different grid points.
 c  evaluate s(u,v) at the current grid point by making the sum of the
 c  cross products of the non-zero b-splines at (u,v), multiplied with
 c  the appropiate b-spline coefficients.
-          term = 0.
+          term = 0.D0
           k1 = numu*nv4+numv
           do 920 l1=1,4
             k2 = k1
@@ -652,3 +654,4 @@ c  adjust the different parameters.
  950  continue
       return
       end
+

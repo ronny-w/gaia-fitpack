@@ -325,31 +325,32 @@ c  latest update : march 1989
 c
 c  ..
 c  ..scalar arguments..
-      real r0,r1,s,fp
+      double precision r0,r1,s,fp   ! DP: upgraded from REAL
       integer mu,mv,nuest,nvest,nu,nv,lwrk,kwrk,ier
 c  ..array arguments..
       integer iopt(3),ider(4),iwrk(kwrk)
-      real u(mu),v(mv),r(mu*mv),c((nuest-4)*(nvest-4)),tu(nuest),
+      double precision u(mu),v(mv),r(mu*mv),c((nuest-4)*(nvest-4)),
+     * tu(nuest),! DP: upgraded from REAL
      * tv(nvest),wrk(lwrk)
 c  ..local scalars..
-      real per,pi,tol,uu,ve,rmax,rmin,one,half,rn,rb,re
+      double precision per,pi,tol,uu,ve,rmax,rmin,one,half,rn,rb,re   ! DP: upgraded from REAL
       integer i,i1,i2,j,jwrk,j1,j2,kndu,kndv,knru,knrv,kwest,l,
      * ldr,lfpu,lfpv,lwest,lww,m,maxit,mumin,muu,nc
 c  ..function references..
-      real atan2
+      double precision atan2   ! DP: upgraded from REAL
       integer max0
 c  ..subroutine references..
 c    fpchec,fpchep,fpspgr
 c  ..
 c  set constants
       one = 1
-      half = 0.5e0
-      pi = atan2(0.,-one)
+      half = 0.5D0
+      pi = atan2(0.D0,-one)
       per = pi+pi
       ve = v(1)+per
 c  we set up the parameters tol and maxit.
       maxit = 20
-      tol = 0.1e-02
+      tol = 0.1D-02
 c  before starting computations, a data check is made. if the input data
 c  are invalid, control is immediately repassed to the calling program.
       ier = 10
@@ -392,7 +393,7 @@ c  if not given, we compute an estimate for r0.
       if(ider(1).lt.0) go to 45
       rb = r0
       go to 55
-  45  rb = 0.
+  45  rb = 0.D0
       do 50 i=1,mv
          rb = rb+r(i)
   50  continue
@@ -401,7 +402,7 @@ c  if not given, we compute an estimate for r1.
   55  if(ider(3).lt.0) go to 60
       re = r1
       go to 70
-  60  re = 0.
+  60  re = 0.D0
       j = m
       do 65 i=1,mv
          re = re+r(j)
@@ -416,11 +417,11 @@ c  we determine the range of r-values.
          if(r(i).gt.rmax) rmax = r(i)
   80  continue
       wrk(5) = rb
-      wrk(6) = 0.
-      wrk(7) = 0.
+      wrk(6) = 0.D0
+      wrk(7) = 0.D0
       wrk(8) = re
-      wrk(9) = 0.
-      wrk(10) = 0.
+      wrk(9) = 0.D0
+      wrk(10) = 0.D0
       wrk(11) = rmax -rmin
       wrk(12) = wrk(11)
       iwrk(4) = mu
@@ -430,12 +431,12 @@ c  we determine the range of r-values.
       if(nv.lt.11 .or. nv.gt.nvest) go to 200
       j = nu
       do 90 i=1,4
-        tu(i) = 0.
+        tu(i) = 0.D0
         tu(j) = pi
         j = j-1
   90  continue
       l = 13
-      wrk(l) = 0.
+      wrk(l) = 0.D0
       if(iopt(2).eq.0) go to 100
       l = l+1
       uu = u(1)
@@ -497,3 +498,4 @@ c  we partition the working space and determine the spline approximation
      * jwrk,ier)
  200  return
       end
+

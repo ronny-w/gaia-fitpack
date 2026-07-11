@@ -6,32 +6,34 @@ c  ..
 c  ..scalar arguments..
       integer mu,mv,mr,nuest,nvest,maxit,nc,nu,nv,lastdi,nplusu,nplusv,
      * lastu0,lastu1,lwrk,ier
-      real r0,r1,s,tol,fp,fp0,fpold,reducu,reducv
+      double precision r0,r1,s,tol,fp,fp0,fpold,reducu,reducv   ! DP: upgraded from REAL
 c  ..array arguments..
       integer iopt(3),ider(4),nrdatu(nuest),nrdatv(nvest),nru(mu),
      * nrv(mv)
-      real u(mu),v(mv),r(mr),tu(nuest),tv(nvest),c(nc),fpintu(nuest),
+      double precision u(mu),v(mv),r(mr),tu(nuest),tv(nvest),c(nc),
+     * fpintu(nuest),! DP: upgraded from REAL
      * fpintv(nvest),dr(6),wrk(lwrk),step(2)
 c  ..local scalars..
-      real acc,fpms,f1,f2,f3,p,per,pi,p1,p2,p3,vb,ve,rmax,rmin,rn,one,
+      double precision acc,fpms,f1,f2,f3,p,per,pi,p1,p2,p3,vb,ve,rmax,
+     * rmin,rn,one,! DP: upgraded from REAL
      * con1,con4,con9
       integer i,ich1,ich3,ifbu,ifbv,ifsu,ifsv,istart,iter,i1,i2,j,ju,
      * ktu,l,l1,l2,l3,l4,mpm,mumin,mu0,mu1,nn,nplu,nplv,npl1,nrintu,
      * nrintv,nue,numax,nve,nvmax
 c  ..local arrays..
       integer idd(4)
-      real drr(6)
+      double precision drr(6)   ! DP: upgraded from REAL
 c  ..function references..
-      real abs,atan2,fprati
+      double precision abs,atan2,fprati   ! DP: upgraded from REAL
       integer max0,min0
 c  ..subroutine references..
 c    fpknot,fpopsp
 c  ..
 c   set constants
       one = 1
-      con1 = 0.1e0
-      con9 = 0.9e0
-      con4 = 0.4e-01
+      con1 = 0.1D0
+      con9 = 0.9D0
+      con4 = 0.4D-01
 c   initialization
       ifsu = 0
       ifsv = 0
@@ -44,7 +46,7 @@ c   initialization
       if(ider(3).ge.0) mumin = mumin-1
       if(iopt(3).eq.1 .and. ider(4).eq.1) mumin = mumin-1
       if(mumin.eq.0) mumin = 1
-      pi = atan2(0.,-one)
+      pi = atan2(0.D0,-one)
       per = pi+pi
       vb = v(1)
       ve = vb+per
@@ -121,7 +123,7 @@ c spline.
          i1 = i1+2
   40  continue
   50  do 60 i=1,4
-         tu(i) = 0.
+         tu(i) = 0.D0
          nu = nu+1
          tu(nu) = pi
   60  continue
@@ -143,7 +145,7 @@ c we set up the knots in the u-direction, needed for interpolation.
       nu = numax
       l = nu
       do 90 i=1,4
-         tu(i) = 0.
+         tu(i) = 0.D0
          tu(l) = pi
          l = l-1
   90  continue
@@ -207,10 +209,10 @@ c  squares polynomial (which is a spline without interior knots).
       lastdi = 0
       nplusu = 0
       nplusv = 0
-      fp0 = 0.
-      fpold = 0.
-      reducu = 0.
-      reducv = 0.
+      fp0 = 0.D0
+      fpold = 0.D0
+      reducu = 0.D0
+      reducv = 0.D0
 c  main loop for the different sets of knots.mpm=mu+mv is a save upper
 c  bound for the number of trials.
  120  mpm = mu+mv
@@ -223,7 +225,7 @@ c  find the position of the additional knots which are needed for the
 c  b-spline representation of s(u,v).
         i = nu
         do 125 j=1,4
-          tu(j) = 0.
+          tu(j) = 0.D0
           tu(i) = pi
           i = i-1
  125    continue
@@ -371,7 +373,7 @@ c  are used to calculate the new value of p such that r(p)=s.          c
 c  convergence is guaranteed by taking f1 > 0 and f3 < 0.              c
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c  initial value for p.
-      p1 = 0.
+      p1 = 0.D0
       f1 = fp0-s
       p3 = -one
       f3 = fpms
@@ -429,6 +431,7 @@ c  error codes and messages.
  420  ier = 1
       go to 440
  430  ier = -1
-      fp = 0.
+      fp = 0.D0
  440  return
       end
+

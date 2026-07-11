@@ -1,4 +1,9 @@
       subroutine fppocu(idim,k,a,b,ib,db,nb,ie,de,ne,cp,np)
+c  ======================================================================
+c  WARNING (fork doc, patch_06 — known limitation):
+c  local arrays of size 6 impose a hard limit k<=5 (spline degree).
+c  to support higher degrees, these fixed-size arrays must be generalized.
+c  ======================================================================
 c  subroutine fppocu finds a idim-dimensional polynomial curve p(u) =
 c  (p1(u),p2(u),...,pidim(u)) of degree k, satisfying certain derivative
 c  constraints at the end points a and b, i.e.
@@ -12,21 +17,21 @@ c  ( coefficients cp(j), j=1,2,...,np )
 c  ..
 c  ..scalar arguments..
       integer idim,k,ib,nb,ie,ne,np
-      real a,b
+      double precision a,b   ! DP: upgraded from REAL
 c  ..array arguments..
-      real db(nb),de(ne),cp(np)
+      double precision db(nb),de(ne),cp(np)   ! DP: upgraded from REAL
 c  ..local scalars..
-      real ab,aki
+      double precision ab,aki   ! DP: upgraded from REAL
       integer i,id,j,jj,l,ll,k1,k2
 c  ..local array..
-      real work(6,6)
+      double precision work(6,6)   ! DP: upgraded from REAL
 c  ..
       k1 = k+1
       k2 = 2*k1
       ab = b-a
       do 110 id=1,idim
         do 10 j=1,k1
-          work(j,1) = 0.
+          work(j,1) = 0.D0
   10    continue
         if(ib.eq.0) go to 50
         l = id
@@ -70,3 +75,4 @@ c  ..
  110  continue
       return
       end
+

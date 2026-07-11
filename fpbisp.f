@@ -3,13 +3,14 @@ c  ..scalar arguments..
       integer nx,ny,kx,ky,mx,my
 c  ..array arguments..
       integer lx(mx),ly(my)
-      real tx(nx),ty(ny),c((nx-kx-1)*(ny-ky-1)),x(mx),y(my),z(mx*my),
+      double precision tx(nx),ty(ny),c((nx-kx-1)*(ny-ky-1)),x(mx),y(my),
+     * z(mx*my),! DP: upgraded from REAL
      * wx(mx,kx+1),wy(my,ky+1)
 c  ..local scalars..
       integer kx1,ky1,l,l1,l2,m,nkx1,nky1
-      real arg,sp,tb,te
+      double precision arg,sp,tb,te   ! DP: upgraded from REAL
 c  ..local arrays..
-      real h(6)
+      double precision h(6)   ! DP: upgraded from REAL
 c  ..subroutine references..
 c    fpbspl
 c  ..
@@ -61,7 +62,7 @@ c  ..
   90    continue
         do 120 j=1,my
           l1 = l+ly(j)
-          sp = 0.
+          sp = 0.D0
           do 110 i1=1,kx1
             l2 = l1
             do 100 j1=1,ky1

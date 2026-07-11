@@ -6,9 +6,9 @@ c  ..
 c  ..scalar arguments
       integer nt,np,ncoff
 c  ..array arguments
-      real co(np),si(np),c(ncoff),f(ncoff)
+      double precision co(np),si(np),c(ncoff),f(ncoff)   ! DP: upgraded from REAL
 c  ..local scalars
-      real cn,c1,c2,c3
+      double precision cn,c1,c2,c3   ! DP: upgraded from REAL
       integer i,ii,j,k,l,ncof,npp,np4,nt4
 c  ..
       nt4 = nt-4

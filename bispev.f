@@ -72,7 +72,8 @@ c  ..scalar arguments..
       integer nx,ny,kx,ky,mx,my,lwrk,kwrk,ier
 c  ..array arguments..
       integer iwrk(kwrk)
-      real tx(nx),ty(ny),c((nx-kx-1)*(ny-ky-1)),x(mx),y(my),z(mx*my),
+      double precision tx(nx),ty(ny),c((nx-kx-1)*(ny-ky-1)),x(mx),y(my),
+     * z(mx*my),! DP: upgraded from REAL
      * wrk(lwrk)
 c  ..local scalars..
       integer i,iw,lwest

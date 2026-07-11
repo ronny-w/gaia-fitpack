@@ -2,9 +2,9 @@
 c  subroutine fprota applies a givens rotation to a and b.
 c  ..
 c  ..scalar arguments..
-      real cos,sin,a,b
+      double precision cos,sin,a,b   ! DP: upgraded from REAL
 c ..local scalars..
-      real stor1,stor2
+      double precision stor1,stor2   ! DP: upgraded from REAL
 c  ..
       stor1 = a
       stor2 = b
@@ -12,3 +12,4 @@ c  ..
       a = cos*stor1-sin*stor2
       return
       end
+
