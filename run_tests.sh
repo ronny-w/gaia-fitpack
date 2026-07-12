@@ -40,7 +40,7 @@ for TEST_SRC in "$EX_DIR"/mn*.f; do
     BASELINE="$BASELINE_DIR/$STEM.expected"
     DATA=$(data_file_for "$STEM")
 
-    if ! gfortran -O2 -w -o "$EXE" "$TEST_SRC" $LIB_SOURCES 2>/dev/null; then
+    if ! gfortran -O2 -w -fdefault-real-8 -fdefault-double-8 -o "$EXE" "$TEST_SRC" $LIB_SOURCES 2>/dev/null; then
         printf "  COMPILE_FAIL  %s\n" "$STEM"
         FAIL=$((FAIL+1))
         continue
